@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify';
 import Profile from './components/pages/Profile';
 import PrivateRoute from './components/PrivateRoute';
+import Attend from './components/pages/Attend';
 
 
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/profile' element={<PrivateRoute/>}>
             <Route path='/profile' element={<Profile/>}/>
           </Route>
+          <Route path='/attend' element={<Attend/>}/>
         </Routes>
       </Router>
       <ToastContainer/>
