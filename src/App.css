@@ -107,3 +107,19 @@ input.log-btn:last-child {
   color: #000;
   background-color: var(--yellow);
 }
+
+/* Graph */
+
+.react-calendar {
+  width: auto;
+  max-width: 70%;
+  margin: auto;
+}
+
+.highlight {
+  background-color: #ffff76 !important;
+}
+
+.react-calendar__tile--now {
+  background-color: #fff;
+}
