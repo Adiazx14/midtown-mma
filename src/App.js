@@ -15,8 +15,8 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<SignIn/>}/>
-          <Route path='/profile' element={<PrivateRoute/>}>
-            <Route path='/profile' element={<Profile/>}/>
+          <Route path='/profile/:id' element={<PrivateRoute/>}>
+            <Route path='/profile/:id' element={<Profile/>}/>
           </Route>
           <Route path='/attend' element={<Attend/>}/>
         </Routes>
