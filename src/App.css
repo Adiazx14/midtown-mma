@@ -371,12 +371,13 @@ abbr[title] {
 }
 
 .sign-out-btn {
-  padding: 5px 30px;
+  padding: 10px 50px;
   background-color: #246030;
   color: #fff;
   margin: 3vh;
   border: none;
   border-radius: 20px;
+  font-size: 1.3em;
 
 }
 
