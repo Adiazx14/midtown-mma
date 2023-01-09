@@ -16,7 +16,7 @@ const Attend = () => {
     const navigate = useNavigate()
     useEffect(()=>{
         const id = localStorage.getItem("uid")
-        if (id !== "k4xQ2mPD3fdg441K1wNlufqhCys1" && id !== "4b3JDYuy6QUCugeMDMuMs56AFK63") {
+        if (id !== "k4xQ2mPD3fdg441K1wNlufqhCys1" && id !== "4b3JDYuy6QUCugeMDMuMs56AFK63" && id !== "L4BrvzFdB2OHBSfHxR7oeCXME1C3") {
             navigate("/")
         }
     })
