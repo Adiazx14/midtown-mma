@@ -147,6 +147,13 @@ input.log-btn:last-child {
   
 }
 
+#actual-btn {
+  margin-top: 1vh;
+  background-color: #246030;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 12px;
+}
 .user-text {
   flex-direction: column;
   display: flex;

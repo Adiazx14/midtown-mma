@@ -64,12 +64,12 @@ const Profile = () => {
         }
     }
 
-    const updatePic = async()=> {
+    const updatePic = async(image)=> {
         try {
-            if (userPic) {
+            if (image) {
                 const storage = getStorage()
-                const imageRef = ref(storage, `images/${userPic.name + v4()}`)
-                const snapShot = await uploadBytes(imageRef, userPic)
+                const imageRef = ref(storage, `images/${image.name + v4()}`)
+                const snapShot = await uploadBytes(imageRef, image)
                 const url = await getDownloadURL(snapShot.ref)
                 const userRef = doc(db, "users", auth.currentUser.uid)
                 await updateDoc(userRef, {
@@ -98,12 +98,10 @@ const Profile = () => {
                     <div className="user-div">
                         <div className="user-pic-div">
                             {user.profilePic? <img className="user-pic" src={user.profilePic} alt="" /> : <UserIcon/>}
-                            {/*  
-
-                                                        <button onClick={updatePic} className="update-profile-pic">Update Profile pic</button>
-                            <input onChange={(e)=>{setUserPic(e.target.files[0])}} type="file" name="update profile" id="" />
-                            */}
-
+                            {/*                              <button onClick={updatePic} className="update-profile-pic">Update Profile pic</button>
+*/}
+                            <input id="update-pic-btn" className="update-pic-btn" style={{display:"None"}} onChange={(e)=>{updatePic(e.target.files[0])}} type="file" name="update profile" />
+                            <button id="actual-btn" onClick={()=>{document.getElementById("update-pic-btn").click()}}>Update Pic</button>
                         </div>
 
                         <div className="user-text">
