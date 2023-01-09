@@ -1,5 +1,6 @@
 import { getAuth } from "firebase/auth"
-import { doc, getDoc } from "firebase/firestore"
+import { doc, getDoc, updateDoc } from "firebase/firestore"
+import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage'
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { db } from "../../firebase.config"
@@ -10,12 +11,16 @@ import {ReactComponent as UserIcon} from "../../assets/userIcon.svg"
 import {ReactComponent as Red} from "../../assets/red.svg"
 import {ReactComponent as Yellow} from "../../assets/yellow.svg"
 import {ReactComponent as Both} from "../../assets/both.svg"
+import {v4} from "uuid"
+import { toast } from "react-toastify"
 
 
 const Profile = () => {
     const auth = getAuth()
-    const [user, setUser] = useState(auth.currentUser   )
+    const [user, setUser] = useState(auth.currentUser)
     const [loading, setLoading] = useState(true)
+    const [userPic, setUserPic] = useState(null)
+
     const navigate = useNavigate()
     const params = useParams()
     useEffect(()=>{
@@ -59,12 +64,48 @@ const Profile = () => {
         }
     }
 
+    const updatePic = async()=> {
+        try {
+            if (userPic) {
+                const storage = getStorage()
+                const imageRef = ref(storage, `images/${userPic.name + v4()}`)
+                const snapShot = await uploadBytes(imageRef, userPic)
+                const url = await getDownloadURL(snapShot.ref)
+                const userRef = doc(db, "users", auth.currentUser.uid)
+                await updateDoc(userRef, {
+                    profilePic: url
+                })
+                setUser(prevState=>{return {...prevState, profilePic: url}})
+                
+                toast.success("Uploaded succesfully")
+            }
+            else {
+                toast.error("No image selected")
+            }
+
+        }
+        catch(err) {
+            console.log(err)
+            toast.error("Error")
+        }
+
+    }
+
     return (
         <div className="profile">
             {!loading?
                 <div className="">
                     <div className="user-div">
-                        <UserIcon/>
+                        <div className="user-pic-div">
+                            {user.profilePic? <img className="user-pic" src={user.profilePic} alt="" /> : <UserIcon/>}
+                            {/*  
+
+                                                        <button onClick={updatePic} className="update-profile-pic">Update Profile pic</button>
+                            <input onChange={(e)=>{setUserPic(e.target.files[0])}} type="file" name="update profile" id="" />
+                            */}
+
+                        </div>
+
                         <div className="user-text">
                             <p>{user.name}</p>
                             <p>ID: {user.id}</p>

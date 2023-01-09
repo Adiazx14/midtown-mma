@@ -131,6 +131,7 @@ input.log-btn:last-child {
 
 
 
+
 .profile {
   color: #fff;
   font-size: 1.5em;
@@ -138,11 +139,11 @@ input.log-btn:last-child {
 }
 
 .user-div {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
-  gap: 3%;
   margin-bottom: 3vh;
+  grid-template-columns: 1fr 1fr;
   
 }
 
@@ -152,7 +153,17 @@ input.log-btn:last-child {
   align-items: start;
 }
 
+.user-pic {
+  height: 20vh;
+  border-radius: 50%;
+  width: 16vw;
+}
 
+.user-pic-div {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
 
 .belt, .armband{
   height: 10%;
@@ -189,7 +200,12 @@ input.log-btn:last-child {
     font-size: 1em;
   
   }
-
+  .user-pic {
+    height: 20vh;
+    border-radius: 50%;
+    width: 40vw;
+  }
+  
   .belt, .armband{
     height: 10%;
     width: 17%;
@@ -394,3 +410,4 @@ abbr[title] {
   display: flex;
   align-items: center;
 }
+
