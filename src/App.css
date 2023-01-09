@@ -156,14 +156,23 @@ input.log-btn:last-child {
 
 .belt, .armband{
   height: 10%;
-  width: 4%;
+  width: 10%;
   margin-left: 1%;
 }
 
 .armband {
-  width: 3%;
+  width: 7%;
 }
 
+
+.p-header {
+  color: #000;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  gap: 3vw;
+  align-items: center;
+}
 @media screen and (max-width: 768px){
 
   .profile {
@@ -174,30 +183,42 @@ input.log-btn:last-child {
 
   .belt, .armband{
     height: 10%;
-    width: 7%;
+    width: 23%;
     margin-left: 1%;
   }
   
   .armband {
-    width: 6%;
+    width: 15%;
   }
-}
-.rank-div {
-  background-color: #818589;
-  border-radius:40px;
-  width: 75%;
-  margin: auto;
-  padding: 1.5% 10px;
+  .p-header {
+    font-size: 1.3em;
+  }
+  
 }
 
-.rank-div p:first-child {
-  display: inline;
-  align-content: center;
+/* .days {
+  color: #000;
+} */
+.rank-div {
+  max-width: 95%;
+  margin: auto;
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  gap: 3vw;
+
 }
+
+
+.rank-div div {
+  background-color: #818589;
+  padding: 1.5% 10px;
+  border-radius:15px;
+}
+
 
 .mt-info {
-  margin-top: 2vh;
 }
+
 
 .line {
   margin: auto;
@@ -242,7 +263,7 @@ abbr[title] {
 } */
 
 .react-calendar {
-    width: 70% !important;
+    width: 75% !important;
     margin: auto;
     margin-top: 3vh;
 }

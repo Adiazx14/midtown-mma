@@ -71,16 +71,24 @@ const Profile = () => {
                     <div className="rank-div">
                         {user.membership !== 1 &&
                         <div className="bjj-info">
-                            <p>BJJ Rank: {user.bjjRank}</p> <Belt className="belt" fill={getBeltColor(user.bjjRank)}/>
-                            <p>Days since last BJJ promotion: {Math.round((new Date().getTime() - user.bjjPromoted.toDate().getTime())/86400000)}</p>
-                            <p>BJJ Classes attended since last promotion: {user.bjjClasses.length - user.bjjClasses.indexOf(user.bjjPromoted.toDate().toLocaleDateString())}</p>
+                            <p className="p-header">
+                               <span>Jiu-Jitsu</span> 
+                               <Belt className="belt" fill={getBeltColor(user.bjjRank)}/>
+                            </p>
+                            <p>Rank: {user.bjjRank}</p> 
+                            <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - user.bjjPromoted.toDate().getTime())/86400000)}</span></p>
+                            <p>Classes attended since last promotion: <span className="days">{user.bjjClasses.length - user.bjjClasses.indexOf(user.bjjPromoted.toDate().toLocaleDateString())}</span></p>
                         </div>
                         }
                         {user.membership !== 0 &&
                         <div className="mt-info">
-                            <p>Muay Thai Rank: {user.mtRank}</p> <Armband className="armband" />
-                            <p>Days since last Muay Thai: {Math.round((new Date().getTime() - user.mtPromoted.toDate().getTime())/86400000)}</p>
-                            <p>Muay Thai Classes attended since last promotion: {user.mtClasses.length - user.mtClasses.indexOf(user.mtPromoted.toDate().toLocaleDateString())}</p>
+                            <p className="p-header">
+                                <span>Muay Thai</span>   
+                                <Armband className="armband" />
+                            </p>
+                            <p>Rank: {user.mtRank}</p> 
+                            <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - user.mtPromoted.toDate().getTime())/86400000)}</span></p>
+                            <p>Classes attended since last promotion: <span className="days">{user.mtClasses.length - user.mtClasses.indexOf(user.mtPromoted.toDate().toLocaleDateString())}</span></p>
                         </div>
                         }
                     </div>
