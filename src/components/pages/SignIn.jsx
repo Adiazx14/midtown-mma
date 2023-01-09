@@ -34,7 +34,9 @@ const SignIn = () => {
                     bjjClasses: [],
                     mtClasses: [],
                     bjjRank: "White Belt",
-                    bjjPromoted: serverTimestamp()
+                    mtRank: "White Armband",
+                    bjjPromoted: serverTimestamp(),
+                    mtPromoted: serverTimestamp()
                 })
                 
             }

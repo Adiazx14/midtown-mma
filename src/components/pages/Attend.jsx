@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { db } from "../../firebase.config"
-import {ReactComponent as Logo} from "../../assets/Logo-3C.png"
 
 const Attend = () => {
 
@@ -34,7 +33,6 @@ const Attend = () => {
                 var user = docs[0].data()
                 if (!(sport==="mtClasses" && user.membership<1) && !(sport==="bjjClasses" && user.membership===1)) {
                     const classes = docs[0].data()[sport]
-                    console.log(classes)
                     const timeStamp = new Date().toLocaleDateString()
                     if (!classes.includes(timeStamp)) {
                         classes.push(timeStamp)
