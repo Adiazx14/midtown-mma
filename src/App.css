@@ -133,7 +133,7 @@ input.log-btn:last-child {
 
 .profile {
   color: #fff;
-  font-size: 1em;
+  font-size: 1.5em;
 
 }
 
@@ -156,12 +156,31 @@ input.log-btn:last-child {
 
 .belt, .armband{
   height: 10%;
-  width: 6%;
+  width: 4%;
   margin-left: 1%;
 }
 
 .armband {
-  width: 5%;
+  width: 3%;
+}
+
+@media screen and (max-width: 768px){
+
+  .profile {
+    color: #fff;
+    font-size: 1em;
+  
+  }
+
+  .belt, .armband{
+    height: 10%;
+    width: 7%;
+    margin-left: 1%;
+  }
+  
+  .armband {
+    width: 6%;
+  }
 }
 .rank-div {
   background-color: #818589;
