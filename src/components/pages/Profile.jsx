@@ -90,7 +90,7 @@ const Profile = () => {
                     <Graph bjjClasses={user.bjjClasses} mtClasses={user.mtClasses}/>
                     
 
-                    <button onClick={signOut}>Log Out</button>
+                    <button className="sign-out-btn" onClick={signOut}>Log Out</button>
 
                 </div>
                 : <h1>Loading</h1>
