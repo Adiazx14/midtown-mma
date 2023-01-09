@@ -7,6 +7,9 @@ import Graph from "../Graph"
 import {ReactComponent as Belt} from "../../assets/belt.svg"
 import {ReactComponent as Armband} from "../../assets/armband.svg"
 import {ReactComponent as UserIcon} from "../../assets/userIcon.svg"
+import {ReactComponent as Red} from "../../assets/red.svg"
+import {ReactComponent as Yellow} from "../../assets/yellow.svg"
+import {ReactComponent as Both} from "../../assets/both.svg"
 
 
 const Profile = () => {
@@ -68,7 +71,7 @@ const Profile = () => {
                             <p>Joined: {user.joinDate.toDate().toDateString().split(" ")[1]} {user.joinDate.toDate().toDateString().split(" ")[3]}</p>
                         </div>  
                     </div>
-                    <div className="rank-div">
+                    <div className={user.membership===2?"rank-div-double":"rank-div"}>
                         {user.membership !== 1 &&
                         <div className="bjj-info">
                             <p className="p-header">
@@ -95,7 +98,24 @@ const Profile = () => {
                     <div className="line">
                         
                     </div>
-                    <Graph bjjClasses={user.bjjClasses} mtClasses={user.mtClasses}/>
+                    <div className="calendar-div">
+                        <Graph bjjClasses={user.bjjClasses} mtClasses={user.mtClasses}/>   
+                        <div className="legend">
+                            <div className="legend-icon-div">
+                                <Red/>
+                                <p>Jiu-Jitsu</p>
+                            </div>
+                            <div className="legend-icon-div">
+                                <Yellow/>
+                                <p>Muay Thai</p>
+                            </div>
+                            <div className="legend-icon-div">
+                                <Both/>
+                                <p>Both</p>
+                            </div>
+                        </div>                         
+                    </div>
+
                     
 
                     <button className="sign-out-btn" onClick={signOut}>Log Out</button>

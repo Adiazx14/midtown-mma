@@ -156,22 +156,31 @@ input.log-btn:last-child {
 
 .belt, .armband{
   height: 10%;
-  width: 10%;
+  width: 13%;
   margin-left: 1%;
 }
 
 .armband {
-  width: 7%;
+  width: 8%;
+}
+
+.rank-div .belt {
+  width: 9%;
 }
 
 
+.rank-div .armband {
+  width: 5.5%;
+}
+
 .p-header {
   color: #000;
-  font-size: 2em;
+  font-size: 1.7em;
   display: flex;
   justify-content: center;
-  gap: 3vw;
+  gap: 2vw;
   align-items: center;
+  margin-bottom: 0.5vh;
 }
 @media screen and (max-width: 768px){
 
@@ -183,23 +192,58 @@ input.log-btn:last-child {
 
   .belt, .armband{
     height: 10%;
-    width: 23%;
+    width: 17%;
     margin-left: 1%;
   }
   
   .armband {
-    width: 15%;
+    width: 10%;
   }
   .p-header {
     font-size: 1.3em;
   }
+
+  .rank-div .belt {
+    width: 12%;
+  }
+  
+  
+  .rank-div .armband {
+    width: 5%;
+  }
   
 }
+@media screen and (max-width: 425px){
 
+  .profile {
+    color: #fff;
+    font-size: 1em;
+  
+  }
+
+  .belt, .armband{
+    height: 10%;
+    width: 25%;
+    margin-left: 1%;
+  }
+  
+  .armband {
+    width: 17%;
+  }
+  .rank-div .belt {
+    width: 19%;
+  }
+
+  
+  .rank-div .armband {
+    width: 12%;
+  }
+  
+}
 /* .days {
   color: #000;
 } */
-.rank-div {
+.rank-div-double, .rank-div {
   max-width: 95%;
   margin: auto;
   grid-template-columns: 1fr 1fr;
@@ -208,12 +252,19 @@ input.log-btn:last-child {
 
 }
 
+.rank-div {
+  display: block;
+  max-width: 65%;
+}
 
-.rank-div div {
+
+.rank-div div, .rank-div-double div, .legend {
   background-color: #818589;
   padding: 1.5% 10px;
   border-radius:15px;
 }
+
+
 
 
 .mt-info {
@@ -232,8 +283,8 @@ input.log-btn:last-child {
  */
 
  .react-calendar { 
- width: 400px;
- max-width: 100%;
+  margin: 3vh 0 0 5vw;
+  width: 85% !important;
  background-color: #fff;
  color: #222;
  border-radius: 8px;
@@ -263,9 +314,7 @@ abbr[title] {
 } */
 
 .react-calendar {
-    width: 75% !important;
-    margin: auto;
-    margin-top: 3vh;
+
 }
 
 .react-calendar__navigation {
@@ -287,21 +336,34 @@ abbr[title] {
  color: #000;
 }
 
+.react-calendar__month-view__days__day--weekend {
+  color: #000 !important;
+}
 
+
+.react-calendar button {
+    padding-left: 2.5px;
+ 
+}
 
 .react-calendar__tile--now {
   background-color: #fff !important;
 }
 
-.bjj{
-  position: relative;
-}
-.bjj {
-
-    background: linear-gradient()
-
- 
+.bjj, .bjj-mt, .mt {
+    background-image: url(./assets/red.svg) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
   }
+
+.mt {
+  background-image: url("./assets/yellow.svg") !important;
+}
+
+.bjj-mt {
+  background-image: url("./assets/both.svg") !important;
+}
 
 
 .band-color{
@@ -316,4 +378,18 @@ abbr[title] {
   border: none;
   border-radius: 20px;
 
+}
+
+.legend {
+  padding: 3%;
+  width: 16%;
+  margin-right: 5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.calendar-div {
+  display: flex;
+  align-items: center;
 }
