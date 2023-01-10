@@ -52,10 +52,10 @@ const SignIn = () => {
     }
     return (
         <div className="sign-in">
-            <h1>Midtowm MMA Houston</h1>
-            <h1 className="blue">Sign in with</h1>
-            
-            <GoogleIcon onClick = {signIn} className="google-icon"/>
+            <img className="logo" src={require("../../assets/Logo-3C.png")} alt="" />
+            <p className="welcome">Welcome to Midtowm</p>
+            <p>MMA Houston</p>
+            <button onClick = {signIn} className="blue">Click here to sign in with Google</button>
         </div>
     )
 }
