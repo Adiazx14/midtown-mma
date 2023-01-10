@@ -262,7 +262,7 @@ align-items: center;
 @media screen and (max-width: 425px){
 
   .user-pic {
-    height: 20vh;
+    height: 18vh;
     border-radius: 50%;
     width: 35vw;
   }
