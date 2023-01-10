@@ -151,6 +151,7 @@ input.log-btn:last-child {
   margin-top: 1vh;
   background-color: #246030;
   border: none;
+  color: #FFF;
   border-radius: 20px;
   padding: 5px 12px;
 }
@@ -163,7 +164,7 @@ input.log-btn:last-child {
 .user-pic {
   height: 20vh;
   border-radius: 50%;
-  width: 16vw;
+  width: 12vw;
 }
 
 .user-pic-div {
@@ -210,7 +211,7 @@ align-items: center;
   .user-pic {
     height: 20vh;
     border-radius: 50%;
-    width: 40vw;
+    width: 28vw;
   }
   
   .belt, .armband{
@@ -237,6 +238,13 @@ align-items: center;
   
 }
 @media screen and (max-width: 425px){
+
+  .user-pic {
+    height: 20vh;
+    border-radius: 50%;
+    width: 35vw;
+  }
+  
 
   .profile {
     color: #fff;
@@ -288,12 +296,6 @@ align-items: center;
 }
 
 
-
-
-.mt-info {
-}
-
-
 .line {
   margin: auto;
   background-color: #fff;
@@ -335,10 +337,6 @@ abbr[title] {
 /* .react-calendar__month-view__days__day--weekend {
  color: #d10000;
 } */
-
-.react-calendar {
-
-}
 
 .react-calendar__navigation {
   margin-bottom: 0;
