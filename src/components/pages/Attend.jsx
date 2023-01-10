@@ -63,7 +63,7 @@ const Attend = () => {
     }
     return (
         <div className="attend">
-            <img src={require("../../assets/Logo-3C.png")} alt="" />
+            <img className="logo" src={require("../../assets/Logo-3C.png")} alt="" />
             <h1>
                 Enter your User Id:
             </h1>
