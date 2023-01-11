@@ -92,51 +92,52 @@ const Profile = () => {
     }
 
     return (
-        <div className="profile">
+        <div className="">
             {!loading?
-                <div className="">
-                    <div className="user-div">
-                        <div className="user-pic-div">
-                            {user.profilePic? <img className="user-pic" src={user.profilePic} alt="" /> : <UserIcon/>}
-                            {/*                              <button onClick={updatePic} className="update-profile-pic">Update Profile pic</button>
-*/}
-                            <input id="update-pic-btn" className="update-pic-btn" style={{display:"None"}} onChange={(e)=>{updatePic(e.target.files[0])}} type="file" name="update profile" />
-                            <button id="actual-btn" onClick={()=>{document.getElementById("update-pic-btn").click()}}>Update Pic</button>
-                        </div>
+                <div className="profile">
+                    <div className="user-and-rank">
+                        <div className="user-div">
+                            <div className="user-pic-div">
+                                {user.profilePic? <img className="user-pic" src={user.profilePic} alt="" /> : <UserIcon/>}
+                                <input id="update-pic-btn" className="update-pic-btn" style={{display:"None"}} onChange={(e)=>{updatePic(e.target.files[0])}} type="file" name="update profile" />
+                                <button id="actual-btn" onClick={()=>{document.getElementById("update-pic-btn").click()}}>Update Pic</button>
+                            </div>
 
-                        <div className="user-text">
-                            <p>{user.name}</p>
-                            <p>ID: {user.id}</p>
-                            <p>Joined: {user.joinDate.toDate().toDateString().split(" ")[1]} {user.joinDate.toDate().toDateString().split(" ")[3]}</p>
-                        </div>  
-                    </div>
-                    <div className={user.membership===2?"rank-div-double":"rank-div"}>
-                        {user.membership !== 1 &&
-                        <div className="bjj-info">
-                            <p className="p-header">
-                               <span>Jiu-Jitsu</span> 
-                               <Belt className="belt" fill={getBeltColor(user.bjjRank)}/>
-                            </p>
-                            <p>Rank: {user.bjjRank}</p> 
-                            <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - user.bjjPromoted.toDate().getTime())/86400000)}</span></p>
-                            <p>Classes attended since last promotion: <span className="days">{user.bjjClasses.length - user.bjjClasses.indexOf(user.bjjPromoted.toDate().toLocaleDateString())}</span></p>
+                            <div className="user-text">
+                                <p>{user.name}</p>
+                                <p>ID: {user.id}</p>
+                                <p>Joined: {user.joinDate.toDate().toDateString().split(" ")[1]} {user.joinDate.toDate().toDateString().split(" ")[3]}</p>
+                            </div>  
                         </div>
-                        }
-                        {user.membership !== 0 &&
-                        <div className="mt-info">
-                            <p className="p-header">
-                                <span>Muay Thai</span>   
-                                <Armband className="armband" />
-                            </p>
-                            <p>Rank: {user.mtRank}</p> 
-                            <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - user.mtPromoted.toDate().getTime())/86400000)}</span></p>
-                            <p>Classes attended since last promotion: <span className="days">{user.mtClasses.length - user.mtClasses.indexOf(user.mtPromoted.toDate().toLocaleDateString())}</span></p>
+                        <div className={user.membership===2?"rank-div-double":"rank-div"}>
+                            {user.membership !== 1 &&
+                            <div className="bjj-info">
+                                <p className="p-header">
+                                <span>Jiu-Jitsu</span> 
+                                <Belt className="belt" fill={getBeltColor(user.bjjRank)}/>
+                                </p>
+                                <p>Rank: {user.bjjRank}</p> 
+                                <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - user.bjjPromoted.toDate().getTime())/86400000)}</span></p>
+                                <p>Classes attended since last promotion: <span className="days">{user.bjjClasses.length - user.bjjClasses.indexOf(user.bjjPromoted.toDate().toLocaleDateString())}</span></p>
+                            </div>
+                            }
+                            {user.membership !== 0 &&
+                            <div className="mt-info">
+                                <p className="p-header">
+                                    <span>Muay Thai</span>   
+                                    <Armband className="armband" />
+                                </p>
+                                <p>Rank: {user.mtRank}</p> 
+                                <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - user.mtPromoted.toDate().getTime())/86400000)}</span></p>
+                                <p>Classes attended since last promotion: <span className="days">{user.mtClasses.length - user.mtClasses.indexOf(user.mtPromoted.toDate().toLocaleDateString())}</span></p>
+                            </div>
+                            }
                         </div>
-                        }
                     </div>
-                    <div className="line">
+                   
+                    <span className="line">
                         
-                    </div>
+                    </span>
                     <div className="calendar-div">
                         <Graph bjjClasses={user.bjjClasses} mtClasses={user.mtClasses}/>   
                         <div className="legend">

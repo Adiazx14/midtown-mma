@@ -51,9 +51,6 @@ body {
   cursor: pointer;
 }
 
-.profile {
-  margin-top: 3vh;
-}
 
 .attend {
   margin-top: 3vh;
@@ -147,8 +144,15 @@ input.log-btn:last-child {
 
 .profile {
   color: #fff;
+  margin-top: 3vh;
   font-size: 1.5em;
+  display: flex;
+  align-items: center;
 
+}
+
+.profile div {
+  flex: 1 1 0px;
 }
 
 .user-div {
@@ -166,7 +170,8 @@ input.log-btn:last-child {
   border: none;
   color: #FFF;
   border-radius: 20px;
-  padding: 5px 12px;
+  font-size: 1em;
+  padding: 5px 23px;
 }
 .user-text {
   flex-direction: column;
@@ -175,9 +180,9 @@ input.log-btn:last-child {
 }
 
 .user-pic {
-  height: 20vh;
+  height: 24vh;
   border-radius: 50%;
-  width: 12vw;
+  width: 14vw;
 }
 
 .user-pic-div {
@@ -214,99 +219,13 @@ align-items: center;
   align-items: center;
   margin-bottom: 0.5vh;
 }
-@media screen and (max-width: 768px){
 
-  .logo {
-    height: 15vh;
-  }
-
-
-.sign-in button {
-  font-size: 2rem;
-}
-
-  .profile {
-    color: #fff;
-    font-size: 1em;
-  
-  }
-  .user-pic {
-    height: 20vh;
-    border-radius: 50%;
-    width: 28vw;
-  }
-  
-  .belt, .armband{
-    height: 10%;
-    width: 17%;
-    margin-left: 1%;
-  }
-  
-  .armband {
-    width: 10%;
-  }
-  .p-header {
-    font-size: 1.3em;
-  }
-
-  .rank-div .belt {
-    width: 12%;
-  }
-  
-  
-  .rank-div .armband {
-    width: 5%;
-  }
-  
-}
-@media screen and (max-width: 425px){
-
-  .user-pic {
-    height: 18vh;
-    border-radius: 50%;
-    width: 35vw;
-  }
-  
-  .sign-in button {
-    font-size: 1rem;
-  }
-  
-    .sign-in {
-      font-size: 1.8em;
-    }
-
-  .profile {
-    color: #fff;
-    font-size: 1em;
-  
-  }
-
-  .belt, .armband{
-    height: 10%;
-    width: 25%;
-    margin-left: 1%;
-  }
-  
-  .armband {
-    width: 17%;
-  }
-  .rank-div .belt {
-    width: 19%;
-  }
-
-  
-  .rank-div .armband {
-    width: 12%;
-  }
-  
-}
 /* .days {
   color: #000;
 } */
 .rank-div-double, .rank-div {
   max-width: 95%;
   margin: auto;
-  grid-template-columns: 1fr 1fr;
   display: grid;
   gap: 3vw;
 
@@ -328,16 +247,17 @@ align-items: center;
 .line {
   margin: auto;
   background-color: #fff;
-  width: 75%;
-  height: 0.3vh;
+  width: 0.5vw;
+  height: 80vh;
   margin-top: 3vh;
+  margin-left: 2vw;
 }
 
 /* 
  */
 
  .react-calendar { 
-  margin: 3vh 0 0 5vw;
+  margin: auto;
   width: 85% !important;
  background-color: #fff;
  color: #222;
@@ -427,21 +347,158 @@ abbr[title] {
   margin: 3vh;
   border: none;
   border-radius: 20px;
+  display: none;  
   font-size: 1.3em;
 
 }
 
 .legend {
-  padding: 3%;
-  width: 16%;
-  margin-right: 5vw;
+  padding: 2vh 4vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1vh;
+  flex: 0 1 auto !important;
+  width: 75%;
+  margin: auto;
+  margin-top: 5vh;
 }
 
 .calendar-div {
-  display: flex;
+  display: grid;
   align-items: center;
+  flex-direction: column;
+  margin-top: 5vh;
+
 }
 
+@media screen and (max-width: 768px){
+
+  .calendar-div {
+    margin-top: 0;
+    flex-direction: row;
+    display: flex;
+  }
+
+  .legend {
+    flex-direction: column;
+    padding: 3%;
+    flex: 1 1 0;
+    margin-right: 5vw;
+    margin-top: auto;
+    width: 16%;
+  }
+
+  .logo {
+    height: 15vh;
+  }
+
+  .profile div {
+    flex: 0  1 auto;
+  }
+
+  .profile {
+    flex-direction: column;
+  }
+
+  .line {
+    margin: auto;
+    background-color: #fff;
+    width: 75%;
+    height: 0.3vh;
+    margin-top: 3vh;
+  }
+
+  .rank-div-double {
+
+    grid-template-columns: 1fr 1fr;
+
+  
+  }
+
+.sign-in button {
+  font-size: 2rem;
+}
+
+.sign-out-btn {
+
+  display: block;
+
+}
+  .profile {
+    color: #fff;
+    font-size: 1em;
+  
+  }
+  .user-pic {
+    height: 20vh;
+    border-radius: 50%;
+    width: 20vw;
+  }
+  
+  .belt, .armband{
+    height: 10%;
+    width: 17%;
+    margin-left: 1%;
+  }
+  
+  .armband {
+    width: 10%;
+  }
+  .p-header {
+    font-size: 1.3em;
+  }
+
+  .rank-div .belt {
+    width: 12%;
+  }
+  
+  
+  .rank-div .armband {
+    width: 5%;
+  }
+  .react-calendar { 
+    margin: 3vh 0 0 5vw !important;
+  }
+  
+}
+@media screen and (max-width: 425px){
+
+  .user-pic {
+    height: 17vh;
+    border-radius: 50%;
+    width: 35vw;
+  }
+  
+  .sign-in button {
+    font-size: 1rem;
+  }
+  
+    .sign-in {
+      font-size: 1.8em;
+    }
+
+  .profile {
+    color: #fff;
+    font-size: 1em;
+  
+  }
+
+  .belt, .armband{
+    height: 10%;
+    width: 25%;
+    margin-left: 1%;
+  }
+  
+  .armband {
+    width: 17%;
+  }
+  .rank-div .belt {
+    width: 19%;
+  }
+
+  
+  .rank-div .armband {
+    width: 12%;
+  }
+  
+}
