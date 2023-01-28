@@ -426,13 +426,13 @@ abbr[title] {
 }
   .profile {
     color: #fff;
-    font-size: 1em;
+    font-size: 1.1em;
   
   }
   .user-pic {
-    height: 20vh;
+    height: 18vh;
     border-radius: 50%;
-    width: 20vw;
+    width: 26vw;
   }
   
   .belt, .armband{

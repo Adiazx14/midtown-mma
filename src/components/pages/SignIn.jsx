@@ -40,13 +40,13 @@ const SignIn = () => {
                 })
                 
             }
-            toast.success("Yay!!")
+            /* toast.success("Yay!!") */
             localStorage.setItem("uid", creds.user.uid)
             navigate("/profile/"+creds.user.uid)
         }
         catch(err) {
             console.log(err)
-            toast.error("Error logging in")
+            /* toast.error("Error logging in") */
         }
 
     }
