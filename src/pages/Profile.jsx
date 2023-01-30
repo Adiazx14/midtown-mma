@@ -26,6 +26,7 @@ const Profile = () => {
     useEffect(()=>{
         const uid = localStorage.getItem("uid")
         if (!(uid===params.id || uid==="WThS4cVfqdZypO04WkgRzsZA9pz2") || uid==="kKdGy0N1GyZfMpZAarkugPcuDu33") {
+            toast.error("You are not authorized to access that page")
             navigate("/")
         }
         const fetchUser = async () => {

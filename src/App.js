@@ -8,8 +8,7 @@ import PrivateRoute from './pages/PrivateRoute';
 import ForgotPassword from './pages/ForgotPassword'
 import Attend from './pages/Attend';
 import SignUp from './pages/SignUp';
-
-
+import Members from './pages/Members';
 
 function App() {
   return (
@@ -23,6 +22,7 @@ function App() {
             <Route path='/profile/:id' element={<Profile/>}/>
           </Route>
           <Route path='/attend' element={<Attend/>}/>
+          <Route path='/members' element={<Members/>}/>
         </Routes>
       </Router>
       <ToastContainer/>

@@ -11,6 +11,7 @@ import { db } from '../firebase.config'
 import { ReactComponent as ArrowRightIcon } from '../assets/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/visibilityIcon.svg'
 import { useEffect } from 'react'
+import { bjjRanks, mtRanks } from '../ranks'
 
 function SignUp() {
 
@@ -38,7 +39,6 @@ function SignUp() {
     mtPromoted: "2023-01-13"
   })
   const { name, email, password, joinDate, membership, bjjPromoted, mtPromoted } = formData
-
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -75,10 +75,12 @@ function SignUp() {
       delete formDataCopy.password
       if (parseInt(membership)<1) {
         formDataCopy.mtPromoted= ""
+        formDataCopy.mtRank= ""
         formDataCopy.mtClasses = []
       }
       if (parseInt(membership)===1) {
         formDataCopy.bjjPromoted= ""
+        formDataCopy.bjjRank= ""
         formDataCopy.bjjClasses = []
       }
       await setDoc(doc(db, 'users', user.uid), formDataCopy)
@@ -142,27 +144,7 @@ function SignUp() {
               onChange={onChange}
               className="formInput"
             >
-              <option value="White Belt">White Belt</option>
-              <option value="Phase 1 White Belt">Phase 1 White Belt</option>
-              <option value="Phase 2 White Belt">Phase 2 White Belt</option>
-              <option value="Phase 4 White Belt">Phase 3 White Belt</option>
-              <option value="Phase 3 White Belt">Phase 4 White Belt</option>
-              <option value="Blue Belt">Blue Belt</option>
-              <option value="1-Stripe Blue Belt">1-Stripe Blue Belt</option>
-              <option value="2-Stripe Blue Belt">2-Stripe Blue Belt</option>
-              <option value="3-Stripe Blue Belt">3-Stripe Blue Belt</option>
-              <option value="4-Stripe Blue Belt">4-Stripe Blue Belt</option>
-              <option value="Purple Belt">Purple Belt</option>
-              <option value="1-Stripe Purple Belt">1-Stripe Purple Belt</option>
-              <option value="2-Stripe Purple Belt">2-Stripe Purple Belt</option>
-              <option value="3-Stripe Purple Belt">3-Stripe Purple Belt</option>
-              <option value="4-Stripe Purple Belt">4-Stripe Purple Belt</option>
-              <option value="Brown Belt">Brown Belt</option>
-              <option value="1-Stripe Brown Belt">1-Stripe Brown Belt</option>
-              <option value="2-Stripe Brown Belt">2-Stripe Brown Belt</option>
-              <option value="3-Stripe Brown Belt">3-Stripe Brown Belt</option>
-              <option value="4-Stripe Brown Belt">4-Stripe Brown Belt</option>
-              <option value="Black Belt">Black Belt</option>
+              {bjjRanks.map(rank=><option value={rank}>{rank}</option>)}
             </select>
             <label htmlFor="bjjPromoted">Last BJJ Promotion:</label>
             <input
@@ -183,27 +165,7 @@ function SignUp() {
               onChange={onChange}
               className="formInput"
             >
-              <option value={0}>White Belt</option>
-              <option value={0}>Phase 1 White Belt</option>
-              <option value={0}>Phase 2 White Belt</option>
-              <option value={0}>Phase 3 White Belt</option>
-              <option value={0}>Phase 4 White Belt</option>
-              <option value={1}>Blue Belt</option>
-              <option value={1}>1-Stripe Blue Belt</option>
-              <option value={1}>2-Stripe Blue Belt</option>
-              <option value={1}>3-Stripe Blue Belt</option>
-              <option value={1}>4-Stripe Blue Belt</option>
-              <option value={1}>Purple Belt</option>
-              <option value={1}>1-Stripe Purple Belt</option>
-              <option value={1}>2-Stripe Purple Belt</option>
-              <option value={1}>3-Stripe Purple Belt</option>
-              <option value={1}>4-Stripe Purple Belt</option>
-              <option value={1}>Brown Belt</option>
-              <option value={1}>1-Stripe Brown Belt</option>
-              <option value={1}>2-Stripe Brown Belt</option>
-              <option value={1}>3-Stripe Brown Belt</option>
-              <option value={1}>4-Stripe Brown Belt</option>
-              <option value={2}>Black Belt</option>
+              {mtRanks.map(rank=><option value={rank}>{rank}</option>)}
             </select>
             <label htmlFor="mtPromoted">Last Muay Thai Promotion:</label>
             <input
