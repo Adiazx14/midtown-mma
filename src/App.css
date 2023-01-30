@@ -9,11 +9,13 @@
   padding: 0;
   font-family: "Helvetica",Verdana,Arial,sans-serif;
   text-align: center;
+  font-size: 1.05rem;
 }
+
 
 body {
   background-color: var(--gray);
-  color: #FFD500;
+  color: var(--yellow);
 }
 
 .logo {
@@ -22,7 +24,6 @@ body {
 
 .sign-in {
   margin-top: 3vh;
-  font-size: 3em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,16 +32,18 @@ body {
   color: var(--yellow);
 }
 
-.welcome  {
-  margin-top: 8vh;
+.sign-form {
+  margin-top: 4vh;
+  text-align: left;
 }
 
-.sign-in button {
-  font-size: 2rem;
-  margin-top: 3vh;
-  border: none;
-  border-radius: 25px;
-  padding: 10px 30px;
+.sign-form div {
+  text-align: left;
+
+}
+
+.sign-form label {
+  margin-left: 3vw;
 }
 
 .sign-in h1 {
@@ -61,7 +64,7 @@ body {
 .center{
   border-radius: 20px;
 }
-input[type="text"]{
+.attend-text-input{
   height: 60px;
   width: 75%;
   margin-top: 10px;
@@ -139,7 +142,173 @@ input.log-btn:last-child {
 
 /* Profile */
 
+.pageHeader {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 4vh;
+  margin-top: 2vh;
+}
+.forgotPasswordLink {
+  cursor: pointer;
+  font-weight: 600;
+  text-align: right;
+}
 
+.pageContainer,
+.offers,
+.profile,
+.listingDetails,
+.category,
+.explore {
+  margin: 1rem;
+}
+@media (min-width: 1024px) {
+  .pageContainer,
+  .offers,
+  .profile,
+  .listingDetails,
+  .category,
+  .explore {
+    margin: 3rem;
+  }
+}
+.pageContainer{
+  margin-bottom: 10rem;
+}
+.input,
+.formInput,
+.textarea {
+  box-shadow: rgba(0, 0, 0, 0.11);
+  border: none;
+  background: #ffffff;
+  border-radius: 3rem;
+  height: 3rem;
+  width: 100%;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 3rem;
+  font-size: 1rem;
+  
+}
+@media (min-width: 1100px) {
+  .input,
+  .formInput,
+  .textarea {
+    padding: 0 5rem;
+  }
+}
+
+.formInput {
+  margin-bottom: 2rem;
+}
+#name {
+  background: url('./assets/badgeIcon.svg') #ffffff 2.5% center no-repeat;
+}
+
+#email{
+  background: url('./assets/personIcon.svg') #ffffff 2.5% center no-repeat;
+}
+
+.passwordInputDiv {
+  position: relative;
+}
+
+#password {
+  background: url('./assets/lockIcon.svg') #ffffff 2.5% center no-repeat;
+}
+
+.showPassword {
+  cursor: pointer;
+  position: absolute;
+  top: -4%;
+  right: 1%;
+  padding: 1rem;
+}
+
+.forgotPasswordLink {
+  cursor: pointer;
+  color: var(--yellow);
+  font-weight: 600;
+  text-align: right;
+}
+
+.signInBar,
+.signUpBar {
+  margin-top: 2 rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: inherit;
+}
+
+.signInButton,
+.signUpButton,
+.signInText,
+.signUpText {
+  cursor: pointer;
+}
+@media (min-width: 1024px) {
+  .signInBar,
+  .signUpBar {
+    justify-content: start;
+  }
+}
+
+.signInText,
+.signUpText {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.signInButton,
+.signUpButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--yellow);
+  border-radius: 50%;
+}
+@media (min-width: 1024px) {
+  .signInButton,
+  .signUpButton {
+    margin-left: 3rem;
+  }
+}
+
+.socialLogin {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.socialIconDiv {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  margin: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.socialIconImg {
+  width: 100%;
+}
+
+.registerLink {
+  margin-top: 4rem;
+  color: var(--yellow);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 3rem;
+}
 
 
 .profile {
@@ -415,9 +584,7 @@ abbr[title] {
   
   }
 
-.sign-in button {
-  font-size: 2rem;
-}
+
 
 .sign-out-btn {
 
@@ -469,9 +636,7 @@ abbr[title] {
     width: 35vw;
   }
   
-  .sign-in button {
-    font-size: 1rem;
-  }
+
   
     .sign-in {
       font-size: 1.8em;

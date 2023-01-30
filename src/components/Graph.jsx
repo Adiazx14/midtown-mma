@@ -8,13 +8,13 @@ const Graph = ({bjjClasses, mtClasses}) => {
   return (
     <div className="graph">
     <Calendar tileClassName={({ date, view }) => {
-      if(bjjClasses.includes(date.toLocaleDateString()) && mtClasses.includes(date.toLocaleDateString())){
+      if(bjjClasses.includes(date.toJSON().slice(0, 10)) && mtClasses.includes(date.toJSON().slice(0, 10))){
        return  'bjj-mt'
       }
-      if(bjjClasses.includes(date.toLocaleDateString())){
+      if(bjjClasses.includes(date.toJSON().slice(0, 10))){
         return  'bjj'
       }
-      if(mtClasses.includes(date.toLocaleDateString())){
+      if(mtClasses.includes(date.toJSON().slice(0, 10))){
         return  'mt'
       }
     }}/>

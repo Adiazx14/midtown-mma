@@ -3,16 +3,16 @@ import { doc, getDoc, updateDoc } from "firebase/firestore"
 import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage'
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { db } from "../../firebase.config"
-import Graph from "../Graph"
-import {ReactComponent as Belt} from "../../assets/belt.svg"
-import {ReactComponent as Armband} from "../../assets/armband.svg"
-import {ReactComponent as UserIcon} from "../../assets/userIcon.svg"
-import {ReactComponent as Red} from "../../assets/red.svg"
-import {ReactComponent as Yellow} from "../../assets/yellow.svg"
-import {ReactComponent as Both} from "../../assets/both.svg"
-import {v4} from "uuid"
+import { db } from "../firebase.config"
+import Graph from "../components/Graph"
+import {ReactComponent as Belt} from "../assets/belt.svg"
+import {ReactComponent as Armband} from "../assets/armband.svg"
+import {ReactComponent as UserIcon} from "../assets/userIcon.svg"
+import {ReactComponent as Red} from "../assets/red.svg"
+import {ReactComponent as Yellow} from "../assets/yellow.svg"
+import {ReactComponent as Both} from "../assets/both.svg"
 import { toast } from "react-toastify"
+import { v4 } from "uuid"
 
 
 const Profile = () => {
@@ -24,6 +24,10 @@ const Profile = () => {
     const navigate = useNavigate()
     const params = useParams()
     useEffect(()=>{
+        const uid = localStorage.getItem("uid")
+        if (!(uid===params.id || uid==="WThS4cVfqdZypO04WkgRzsZA9pz2") || uid==="kKdGy0N1GyZfMpZAarkugPcuDu33") {
+            navigate("/")
+        }
         const fetchUser = async () => {
             try {
                 const userRef = doc(db, "users", params.id)
@@ -39,6 +43,7 @@ const Profile = () => {
         }
         fetchUser()
 
+
     },[])
 
     const signOut = () => {
@@ -48,20 +53,22 @@ const Profile = () => {
     }
 
     const getBeltColor = (rank) => {
-        switch(rank.slice(2)){
-
-            case 'Blu':
-                return "#ffc"
-            case 'Pur':
-                return "purple"
-            case 'Brw':
-                return "brown"
-            case 'Bla':
-                return "#000"
-            default:
-                return "#fff"
-
+        console.log(rank)
+        console.log(rank.includes("Blue"))
+        if (rank.includes("Blue")) {
+            return "#00c"
         }
+        if (rank.includes("Purple")) {
+            return "purple"
+        }
+        if (rank.includes("Brown")) {
+            return "#964B00"
+        }
+        if (rank.includes("Black")) {
+            return "#222"
+        }
+        
+        return "#fff"
     }
 
     const updatePic = async(image)=> {
@@ -106,30 +113,30 @@ const Profile = () => {
                             <div className="user-text">
                                 <p>{user.name}</p>
                                 <p>ID: {user.id}</p>
-                                <p>Joined: {user.joinDate.toDate().toDateString().split(" ")[1]} {user.joinDate.toDate().toDateString().split(" ")[3]}</p>
+                                <p>Joined: {user.joinDate}</p>
                             </div>  
                         </div>
-                        <div className={user.membership===2?"rank-div-double":"rank-div"}>
-                            {user.membership !== 1 &&
+                        <div className={user.membership=== "2"?"rank-div-double":"rank-div"}>
+                            {user.membership !== "1" &&
                             <div className="bjj-info">
                                 <p className="p-header">
                                 <span>Jiu-Jitsu</span> 
                                 <Belt className="belt" fill={getBeltColor(user.bjjRank)}/>
                                 </p>
                                 <p>Rank: {user.bjjRank}</p> 
-                                <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - user.bjjPromoted.toDate().getTime())/86400000)}</span></p>
-                                <p>Classes attended since last promotion: <span className="days">{user.bjjClasses.length - user.bjjClasses.indexOf(user.bjjPromoted.toDate().toLocaleDateString())}</span></p>
+                                <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - Date.parse(user.bjjPromoted))/86400000)}</span></p>
+                                <p>Classes attended since last promotion: <span className="days">{user.bjjClasses.length - user.bjjClasses.indexOf(user.bjjPromoted)}</span></p>
                             </div>
                             }
-                            {user.membership !== 0 &&
+                            {user.membership !== "0" &&
                             <div className="mt-info">
                                 <p className="p-header">
                                     <span>Muay Thai</span>   
                                     <Armband className="armband" />
                                 </p>
                                 <p>Rank: {user.mtRank}</p> 
-                                <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - user.mtPromoted.toDate().getTime())/86400000)}</span></p>
-                                <p>Classes attended since last promotion: <span className="days">{user.mtClasses.length - user.mtClasses.indexOf(user.mtPromoted.toDate().toLocaleDateString())}</span></p>
+                                <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - Date.parse(user.mtPromoted))/86400000)}</span></p>
+                                <p>Classes attended since last promotion: <span className="days">{user.mtClasses.length - user.mtClasses.indexOf(user.mtPromoted)}</span></p>
                             </div>
                             }
                         </div>

@@ -2,7 +2,7 @@ import { collection, doc, getDocs, query, updateDoc, where } from "firebase/fire
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { db } from "../../firebase.config"
+import { db } from "../firebase.config"
 
 const Attend = () => {
 
@@ -16,7 +16,7 @@ const Attend = () => {
     const navigate = useNavigate()
     useEffect(()=>{
         const id = localStorage.getItem("uid")
-        if (id !== "k4xQ2mPD3fdg441K1wNlufqhCys1" && id !== "kKdGy0N1GyZfMpZAarkugPcuDu33") {
+        if (id !== "WThS4cVfqdZypO04WkgRzsZA9pz2" && id !== "kKdGy0N1GyZfMpZAarkugPcuDu33") {
             navigate("/")
         }
     })
@@ -31,9 +31,9 @@ const Attend = () => {
             const docs = docSnap.docs
             if (docs.length > 0) {
                 var user = docs[0].data()
-                if (!(sport==="mtClasses" && user.membership<1) && !(sport==="bjjClasses" && user.membership===1)) {
+                if (!(sport==="mtClasses" && parseInt(user.membership)<1) && !(sport==="bjjClasses" && user.membership==="1")) {
                     const classes = docs[0].data()[sport]
-                    const timeStamp = new Date().toLocaleDateString()
+                    const timeStamp = new Date().toJSON().slice(0, 10);
                     if (!classes.includes(timeStamp)) {
                         classes.push(timeStamp)
                         await updateDoc(doc(db, "users", docs[0].id), {
@@ -63,13 +63,13 @@ const Attend = () => {
     }
     return (
         <div className="attend">
-            <img className="logo" src={require("../../assets/Logo-3C.png")} alt="" />
+            <img className="logo" src={require("../assets/Logo-3C.png")} alt="" />
             <h1>
                 Enter your User Id:
             </h1>
             <div className="center">
          <form name="forms">
-            <input type="text" id="display" name="display" disabled value={uid}/>
+            <input type="text" className="attend-text-input" id="display" name="display" disabled value={uid}/>
             <div className="buttons">
                <input type="button" onClick={(e)=>{onChange(e)}} id="seven" value="7"/>
                <input type="button" onClick={(e)=>{onChange(e)}} id="eight" value="8"/>
