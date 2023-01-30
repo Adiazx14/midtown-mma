@@ -10,8 +10,19 @@ import { setDoc, doc, serverTimestamp, updateDoc, increment, getDoc } from 'fire
 import { db } from '../firebase.config'
 import { ReactComponent as ArrowRightIcon } from '../assets/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/visibilityIcon.svg'
+import { useEffect } from 'react'
 
 function SignUp() {
+
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    const uid = localStorage.getItem("uid")
+    if (uid) {
+      navigate("/profile/"+uid)
+    }
+  },[])
+
   const [showPassword, setShowPassword] = useState(false)
   const today = new Date().toJSON().slice(0, 10)
   const [formData, setFormData] = useState({
@@ -28,7 +39,6 @@ function SignUp() {
   })
   const { name, email, password, joinDate, membership, bjjPromoted, mtPromoted } = formData
 
-  const navigate = useNavigate()
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -63,7 +73,14 @@ function SignUp() {
 
       const formDataCopy = { ...formData, id: count.data().count}
       delete formDataCopy.password
-     
+      if (parseInt(membership)<1) {
+        formDataCopy.mtPromoted= ""
+        formDataCopy.mtClasses = []
+      }
+      if (parseInt(membership)===1) {
+        formDataCopy.bjjPromoted= ""
+        formDataCopy.bjjClasses = []
+      }
       await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
       navigate('/profile/'+ user.uid)
