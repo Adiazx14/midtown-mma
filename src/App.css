@@ -765,8 +765,9 @@ abbr[title] {
   color: var(--gray);
   border-radius: 10px;
   width: 30%;
-  height: 15vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .popup h2 {
@@ -793,3 +794,12 @@ abbr[title] {
   background-color: var(--yellow);
 }
 
+.popup-btn {
+  padding: 5px;
+  background-color: #246030;
+  color: #fff;
+  margin: 3vh;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
