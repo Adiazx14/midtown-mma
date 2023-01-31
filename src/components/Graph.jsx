@@ -14,7 +14,7 @@ const Graph = ({bjjClasses, mtClasses}) => {
 
   const editDay = (day)=> {
     const uid = localStorage.getItem("uid")
-    if (uid === "WThS4cVfqdZypO04WkgRzsZA9pz2" || uid === "kKdGy0N1GyZfMpZAarkugPcuDu33") {
+    if (uid === "WThS4cVfqdZypO04WkgRzsZA9pz2" || uid === "gryUf2y7DfdjiSYDS1ABZr1S8T72") {
       setEditing(true)
       setEditedDay(day.toJSON().slice(0, 10))
     }
