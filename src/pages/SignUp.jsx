@@ -17,12 +17,6 @@ function SignUp() {
 
   const navigate = useNavigate()
 
-  useEffect(()=>{
-    const uid = localStorage.getItem("uid")
-    if (uid) {
-      navigate("/profile/"+uid)
-    }
-  },[])
 
   const [showPassword, setShowPassword] = useState(false)
   const today = new Date().toJSON().slice(0, 10)
