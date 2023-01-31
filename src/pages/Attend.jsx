@@ -34,6 +34,7 @@ const Attend = () => {
                 if (!(sport==="mtClasses" && parseInt(user.membership)<1) && !(sport==="bjjClasses" && user.membership==="1")) {
                     const classes = docs[0].data()[sport]
                     const timeStamp = new Date().toJSON().slice(0, 10);
+                    console.log(timeStamp)
                     if (!classes.includes(timeStamp)) {
                         classes.push(timeStamp)
                         await updateDoc(doc(db, "users", docs[0].id), {

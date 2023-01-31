@@ -36,7 +36,6 @@ const Profile = () => {
                 const data = docSnap.data()
                 setUser(data)
                 setLoading(false)
-                console.log(data)
             }
             catch(err){
                 console.log(err)
@@ -54,8 +53,7 @@ const Profile = () => {
     }
 
     const getBeltColor = (rank) => {
-        console.log(rank)
-        console.log(rank.includes("Blue"))
+
         if (rank.includes("Blue")) {
             return "#00c"
         }
@@ -140,6 +138,7 @@ const Profile = () => {
                                 <p>Classes attended since last promotion: <span className="days">{user.mtClasses.length - user.mtClasses.indexOf(user.mtPromoted)}</span></p>
                             </div>
                             }
+                            <button className="sign-out-btn desk" onClick={signOut}>Log Out</button>
                         </div>
                     </div>
                    

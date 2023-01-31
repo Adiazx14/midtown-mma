@@ -59,6 +59,9 @@ body {
   cursor: pointer;
 }
 
+button {
+  cursor: pointer;
+}
 
 .attend {
   margin-top: 3vh;
@@ -146,6 +149,7 @@ input.log-btn:last-child {
 }
 
 /* Profile */
+
 
 .pageHeader {
   font-size: 2rem;
@@ -406,8 +410,9 @@ align-items: center;
 }
 
 .rank-div {
-  display: block;
+  display: flex;
   max-width: 65%;
+  flex-direction: column;  max-width: 65%;
 }
 
 
@@ -525,6 +530,9 @@ abbr[title] {
   font-size: 1.3em;
 
 }
+.desk {
+  display: block;
+}
 
 .legend {
   padding: 2vh 4vw;
@@ -595,6 +603,10 @@ abbr[title] {
 
   display: block;
 
+}
+
+.desk {
+  display: none;
 }
   .profile {
     color: #fff;
@@ -803,3 +815,4 @@ abbr[title] {
   border-radius: 20px;
   cursor: pointer;
 }
+
