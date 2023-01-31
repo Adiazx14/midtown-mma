@@ -23,6 +23,7 @@ export const bjjRanks = [
 ]
 
 export const mtRanks = [
+    "White Pra Jiad",
     "Yellow/White Pra Jiad",
     "Yellow Pra Jiad",
     "Orange/White Pra Jiad",

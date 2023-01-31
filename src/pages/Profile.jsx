@@ -111,6 +111,7 @@ const Profile = () => {
 
                             <div className="user-text">
                                 <p>{user.name}</p>
+                                <p><a href={"mailto:" +user.email}>{user.email}</a></p>
                                 <p>ID: {user.id}</p>
                                 <p>Joined: {user.joinDate}</p>
                             </div>  
@@ -123,8 +124,7 @@ const Profile = () => {
                                 <Belt className="belt" fill={getBeltColor(user.bjjRank)}/>
                                 </p>
                                 <p>Rank: {user.bjjRank}</p> 
-                                <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - Date.parse(user.bjjPromoted))/86400000)}</span></p>
-                                <p>Classes attended since last promotion: <span className="days">{user.bjjClasses.length - user.bjjClasses.indexOf(user.bjjPromoted)}</span></p>
+                                <p>Last promotion: {user.bjjPromoted}</p>
                             </div>
                             }
                             {user.membership !== "0" &&
@@ -134,8 +134,7 @@ const Profile = () => {
                                     <Armband className="armband" />
                                 </p>
                                 <p>Rank: {user.mtRank}</p> 
-                                <p>Days since last promotion: <span className="days">{Math.round((new Date().getTime() - Date.parse(user.mtPromoted))/86400000)}</span></p>
-                                <p>Classes attended since last promotion: <span className="days">{user.mtClasses.length - user.mtClasses.indexOf(user.mtPromoted)}</span></p>
+                                <p>Last promotion: {user.mtPromoted}</p>
                             </div>
                             }
                             <button className="sign-out-btn desk" onClick={signOut}>Log Out</button>

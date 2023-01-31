@@ -150,6 +150,13 @@ input.log-btn:last-child {
 
 /* Profile */
 
+.user-text a {
+  font-size: inherit;
+}
+
+.user-text p {
+  margin-bottom: 0.1rem;
+}
 
 .pageHeader {
   font-size: 2rem;
