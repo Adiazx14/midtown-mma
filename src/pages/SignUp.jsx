@@ -34,7 +34,7 @@ function SignUp() {
     bjjClasses: [today],
     mtClasses: [today],
     bjjRank: "White Belt",
-    mtRank: "White Armband",
+    mtRank: "White Pra Jiad",
     bjjPromoted: "2023-01-12",
     mtPromoted: "2023-01-13"
   })
