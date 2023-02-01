@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { db } from "../firebase.config"
 import {ReactComponent as EditIcon} from "../assets/edit_icon.svg"
+import {ReactComponent as ReloadIcon} from "../assets/reloadIcon.svg"
 import { bjjRanks, mtRanks } from "../ranks"
 
 const Members = ()=> {
@@ -78,7 +79,11 @@ const Members = ()=> {
         <div className="tables-div">
             {bjjMembers.length>0 && 
             <div className="bjj-table">
+                <div className="table-heading">
                 <h1>BJJ Members</h1>
+                <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
+                </div>
+
                 <div className="container">
 	                <div className="table">
                         <div className="table-header">
@@ -116,7 +121,10 @@ const Members = ()=> {
                             }
             {mtMembers.length>0 &&
                 <div className="mt-table">
-                    <h1>Muay Thai Members</h1>
+                    <div className="table-heading">
+                        <h1>Muay Thai Members</h1>
+                        <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
+                    </div>
                     <div className="container">
                     
                     <div className="table">

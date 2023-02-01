@@ -423,11 +423,14 @@ align-items: center;
 }
 
 
-.rank-div div, .rank-div-double div, .legend {
+.bjj-info, .mt-info, .legend {
   background-color: #818589;
   padding: 1.5% 10px;
   border-radius:15px;
 }
+
+
+
 
 
 .line {
@@ -540,6 +543,20 @@ abbr[title] {
 .desk {
   display: block;
 }
+
+.links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.links * {
+  color: var(--yellow);
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  background-color: var(--grey);
+}
+
 
 .legend {
   padding: 2vh 4vw;
@@ -696,7 +713,21 @@ abbr[title] {
 
 .tables-div h1 {
   font-size: 2em;
-  margin-top: 4vh;
+}
+
+.reload-icon {
+  fill: #fff;
+  height: 2.1rem;
+  width: 2.1rem;
+  cursor: pointer;
+}
+
+.table-heading {
+  display: flex;
+  margin-top: 5vh;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 

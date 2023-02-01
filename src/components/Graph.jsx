@@ -56,9 +56,7 @@ const Graph = ({bjjClasses, mtClasses}) => {
   return (
     <div className="graph">
     <Calendar onClickDay={(value)=>{editDay(value)}} tileClassName={({ date, view }) => {
-      console.log(date.getTime())
       const timeStamp = new Date(date.getTime()-21600000).toJSON().slice(0,10)
-      console.log(timeStamp)
       if(bjjClasses.includes(timeStamp) && mtClasses.includes(timeStamp)){
        return  'bjj-mt'
       }

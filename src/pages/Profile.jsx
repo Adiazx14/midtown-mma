@@ -2,7 +2,7 @@ import { getAuth } from "firebase/auth"
 import { doc, getDoc, updateDoc } from "firebase/firestore"
 import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage'
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { db } from "../firebase.config"
 import Graph from "../components/Graph"
 import {ReactComponent as Belt} from "../assets/belt.svg"
@@ -137,7 +137,14 @@ const Profile = () => {
                                 <p>Last promotion: {user.mtPromoted}</p>
                             </div>
                             }
-                            <button className="sign-out-btn desk" onClick={signOut}>Log Out</button>
+                            { (user.id === 6 || user.id===2) &&
+                            <div className="links desk">
+                                <Link to={"/"}> Sign-In Page </Link>
+                                <Link to={"/members"}>Members</Link>
+                                <Link to={"/attend"}>Attendance Pad</Link>
+                                <button  className="sign-out-link desk" onClick={signOut}>Log Out</button>
+                            </div>
+                            }
                         </div>
                     </div>
                    
