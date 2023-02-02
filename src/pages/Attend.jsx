@@ -42,7 +42,6 @@ const Attend = () => {
                             [sport]:classes
                         })
                         toast.success("Logged in!")
-                        navigate("/profile/"+docs[0].id)
                     }
                     else {
                         toast.error("You already logged in that class")

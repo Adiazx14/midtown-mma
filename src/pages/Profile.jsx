@@ -170,6 +170,9 @@ const Profile = () => {
                     </div>
 
                     
+
+                    <button className="sign-out-btn" onClick={signOut}>Log Out</button>
+
                 </div>
                 : <h1>Loading</h1>
             }
