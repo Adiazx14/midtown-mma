@@ -42,6 +42,7 @@ const Attend = () => {
                             [sport]:classes
                         })
                         toast.success("Logged in!")
+                        setUid("")
                     }
                     else {
                         toast.error("You already logged in that class")
