@@ -41,7 +41,7 @@ const Attend = () => {
                         await updateDoc(doc(db, "users", docs[0].id), {
                             [sport]:classes
                         })
-                        toast.success("Logged in!")
+                        toast.success(user.name.split(" ")[0] + ", thanks for checking in.")
                         setUid("")
                     }
                     else {
