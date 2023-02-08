@@ -168,9 +168,6 @@ const Profile = () => {
                             </div>
                         </div>                         
                     </div>
-
-                    
-
                     <button className="sign-out-btn" onClick={signOut}>Log Out</button>
 
                 </div>

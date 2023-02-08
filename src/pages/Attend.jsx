@@ -7,20 +7,51 @@ import { db } from "../firebase.config"
 const Attend = () => {
 
     const [uid, setUid] = useState("")
+    const [sport, setSport] = useState("")
+    const [user, setUser] = useState({})
 
     const onChange = (e) => {
         setUid(prevState=>{
             return prevState + e.target.value 
         })
     }
+
     const navigate = useNavigate()
+
     useEffect(()=>{
         const id = localStorage.getItem("uid")
         if (id !== "WThS4cVfqdZypO04WkgRzsZA9pz2" && id !== "kKdGy0N1GyZfMpZAarkugPcuDu33" && id !== "gryUf2y7DfdjiSYDS1ABZr1S8T72") {
             navigate("/")
         }
     })
+
+    const log = async() => {
+        if (!(sport==="mtClasses" && parseInt(user.membership)<1) && !(sport==="bjjClasses" && user.membership==="1")) {
+            const classes = user[sport]
+            var timeStamp = new Date()
+
+            timeStamp = new Date(timeStamp.getTime()-21600000).toJSON().slice(0,10)
+            if (!classes.includes(timeStamp)) {
+                classes.push(timeStamp)
+                await updateDoc(doc(db, "users", user.id), {
+                    [sport]:classes
+                })
+                toast.success(user.name.split(" ")[0] + ", thanks for checking in.")
+                setUid("")
+            }
+            else {
+                toast.error("You already logged in that class")
+            }
+        }
+        else {
+            toast.error("Your membership does not include that sport")
+            
+        }
+        setUser({})
+        setSport("")
+    }
     const attend = async(sport) => {
+
          
         try {
             const userRef = collection(db, "users")
@@ -31,26 +62,8 @@ const Attend = () => {
             const docs = docSnap.docs
             if (docs.length > 0) {
                 var user = docs[0].data()
-                if (!(sport==="mtClasses" && parseInt(user.membership)<1) && !(sport==="bjjClasses" && user.membership==="1")) {
-                    const classes = docs[0].data()[sport]
-                    var timeStamp = new Date()
-
-                    timeStamp = new Date(timeStamp.getTime()-21600000).toJSON().slice(0,10)
-                    if (!classes.includes(timeStamp)) {
-                        classes.push(timeStamp)
-                        await updateDoc(doc(db, "users", docs[0].id), {
-                            [sport]:classes
-                        })
-                        toast.success(user.name.split(" ")[0] + ", thanks for checking in.")
-                        setUid("")
-                    }
-                    else {
-                        toast.error("You already logged in that class")
-                    }
-                }
-                else {
-                    toast.error("Your membership does not include that sport")
-                }
+                setUser({...user, id:docs[0].id})
+                setSport(sport)
             }
             else {
                 toast.error("User Id not found")
@@ -61,8 +74,9 @@ const Attend = () => {
         catch(err) {
             console.log(err)
         }
-
+        setUid("")
     }
+
     return (
         <div className="attend">
             <img className="logo" src={require("../assets/Logo-3C.png")} alt="" />
@@ -95,6 +109,16 @@ const Attend = () => {
                </div>
             </div>
          </form>
+         <div className={`overlay ${user.name?"visible":"hidden"}`} >
+            <div className="popup">
+                <p>{user.name}?</p>
+            <div className="verify-btns">
+                <input type="button" onClick={log} value="Yes"/>
+                <input type="button" onClick={()=>{setUser({})}} value="No"/>
+
+               </div>
+            </div>
+         </div>
         </div>
         </div>
     )

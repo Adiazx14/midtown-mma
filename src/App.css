@@ -790,6 +790,40 @@ abbr[title] {
 
 /*  */
 
+
+.verify-btns input {
+  margin-top: 3vh;
+  border-radius: 30px;
+  width: 200px;
+  height: 55px;
+
+}
+
+.verify-btns input:first-child {
+  background: none;
+  background-color: #246030;
+  color: #fff;
+}
+
+.verify-btns input:last-child {
+  background:none;
+  background-color: #cc0000;
+  color: #fff;
+}
+
+.attend .overlay {
+  font-size: 22px;
+
+}
+
+.attend .popup {
+  margin: 29% auto;
+  width: 63%;
+ 
+}
+
+
+
 .overlay {
   position: fixed;
   top: 0;
@@ -798,6 +832,7 @@ abbr[title] {
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
   opacity: 1;
+  
 }
 
 .hidden {
