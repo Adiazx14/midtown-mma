@@ -89,9 +89,6 @@ const SignIn = () => {
             </button>
           </div>
         </form>
-        <Link to='/sign-up' className='registerLink'>
-          Sign Up Instead
-        </Link>
         </div>
     )
 }
