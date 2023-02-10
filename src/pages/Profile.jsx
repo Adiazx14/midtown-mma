@@ -139,7 +139,7 @@ const Profile = () => {
                             }
                             { (user.id === 6 || user.id===2) &&
                             <div className="links desk">
-                                <Link to={"/"}> Sign-In Page </Link>
+                                <Link to={"/sign-up"}> Sign-Up Page </Link>
                                 <Link to={"/members"}>Members</Link>
                                 <Link to={"/attend"}>Attendance Pad</Link>
                                 <button  className="sign-out-link desk" onClick={signOut}>Log Out</button>
