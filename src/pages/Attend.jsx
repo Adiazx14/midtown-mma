@@ -20,7 +20,7 @@ const Attend = () => {
 
     useEffect(()=>{
         const id = localStorage.getItem("uid")
-        if (id !== "WThS4cVfqdZypO04WkgRzsZA9pz2" && id !== "kKdGy0N1GyZfMpZAarkugPcuDu33" && id !== "gryUf2y7DfdjiSYDS1ABZr1S8T72") {
+        if (id !== "WThS4cVfqdZypO04WkgRzsZA9pz2" && id !== "1joF1n0hmQSdiztegU0uZmy5I3e2" && id !== "gryUf2y7DfdjiSYDS1ABZr1S8T72") {
             navigate("/")
         }
     })

@@ -25,7 +25,7 @@ const Profile = () => {
     const params = useParams()
     useEffect(()=>{
         const uid = localStorage.getItem("uid")
-        if ((uid!==params.id && uid!=="WThS4cVfqdZypO04WkgRzsZA9pz2") && uid!=="gryUf2y7DfdjiSYDS1ABZr1S8T72") {
+        if ((uid!==params.id && uid!=="WThS4cVfqdZypO04WkgRzsZA9pz2") && uid!=="gryUf2y7DfdjiSYDS1ABZr1S8T72" && uid!=="1joF1n0hmQSdiztegU0uZmy5I3e2") {
             toast.error("You are not authorized to access that page")
             navigate("/")
         }
@@ -137,7 +137,7 @@ const Profile = () => {
                                 <p>Last promotion: {user.mtPromoted}</p>
                             </div>
                             }
-                            { (user.id === 6 || user.id===2) &&
+                            { (user.id === 6 || user.id===2 || user.id=== 145) &&
                             <div className="links desk">
                                 <Link to={"/sign-up"}> Add a member </Link>
                                 <Link to={"/members"}>Members</Link>
