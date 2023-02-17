@@ -17,9 +17,9 @@ const Members = ()=> {
     const [editing, setEditing] = useState(false)
     const [fieldEdit, setFieldEdit] = useState(0)
     const [editedMember, setEditedMember] = useState({})
-    const [lastThirtyDates, setLastThirtyDays] = useState([])
     const [bjjAttendace, setBjjAttendance] = useState([])
     const [mtAttendace, setMtAttendance] = useState([])
+
 
 
     const fetchMembers = async()=>{
@@ -34,44 +34,15 @@ const Members = ()=> {
             if (parseInt(memberData.membership)>=1) {
                 mtMembersData.push({...memberData, uid:member.id})
             }
-            const bjjAtt = [memberData.name]
-            const mtAtt = [memberData.name]
-            lastThirtyDates.forEach(day=>{
-                if (memberData.bjjClasses.includes(day)) {
-                    bjjAtt.push("YES")
-                }
-                else {
-                    bjjAtt.push("NO")
-                }
-                if (memberData.mtClasses.includes(day)) {
-                    bjjAtt.push("YES")
-                }
-                else {
-                    mtAtt.push("NO")
-                }
-            })
-            if (bjjAtt.includes("YES")) {
-                setBjjAttendance(["adasd"])
-                console.log(bjjAttendace)
-
-            }
-            if (mtAtt.includes("YES")) {
-                setMtAttendance(prev=>[...prev, mtAtt])
-            }
-            
-            
+                    
         })
         setBjjMembers(bjjMembersData)
         setmMtMembers(mtMembersData)
-        setBjjAttendance(prev=>prev.splice(0,0, lastThirtyDates))
-    }
+/*         setBjjAttendance((prev)=>{ return prev.splice(0,0, lastThirtyDates)})
+ */    }
 
-    useEffect(()=>{
-        const uid = localStorage.getItem("uid")
-        if ((uid!=="WThS4cVfqdZypO04WkgRzsZA9pz2") && uid !== "gryUf2y7DfdjiSYDS1ABZr1S8T72" && uid !== "1joF1n0hmQSdiztegU0uZmy5I3e2") {
-            toast.error("You are not authorized to access that page")
-            navigate("/")
-        }
+    const generateCSV = ()=> {
+        
         const date = new Date()
         const dates = []
         for (let i = 0; i<30; i++) {
@@ -80,10 +51,53 @@ const Members = ()=> {
             }
             date.setDate(date.getDate()-1)
         }
-        dates.splice(0, 0, "Name")
-        setLastThirtyDays(dates)
-        fetchMembers()
+        const bjjAttendaceTemp = []
+        bjjMembers.forEach(member=>{
 
+            const bjjAtt = [member.name]
+            dates.forEach(day=>{
+                console.log(day)
+                if (member.bjjClasses.includes(day)) {
+                    bjjAtt.push("YES")
+                }
+                else {
+                    bjjAtt.push("NO")
+                }
+            })
+            bjjAttendaceTemp.push(bjjAtt)
+        })
+        const mtAttendaceTemp = []
+        mtMembers.forEach(member=>{
+
+            const mtAtt = [member.name]
+            dates.forEach(day=>{
+                console.log(day)
+                if (member.mtClasses.includes(day)) {
+                    mtAtt.push("YES")
+                }
+                else {
+                    mtAtt.push("NO")
+                }
+            })
+            mtAttendaceTemp.push(mtAtt)
+        })
+        
+        dates.splice(0, 0, "Name")
+        bjjAttendaceTemp.splice(0,0, dates)
+        mtAttendaceTemp.splice(0,0, dates)
+        setBjjAttendance(bjjAttendaceTemp)
+        setMtAttendance(mtAttendaceTemp)
+
+    }
+
+
+    useEffect(()=>{
+        const uid = localStorage.getItem("uid")
+        if ((uid!=="WThS4cVfqdZypO04WkgRzsZA9pz2") && uid !== "gryUf2y7DfdjiSYDS1ABZr1S8T72" && uid !== "1joF1n0hmQSdiztegU0uZmy5I3e2") {
+            toast.error("You are not authorized to access that page")
+            navigate("/")
+        }
+        fetchMembers()
 
     },[])
 
@@ -124,7 +138,8 @@ const Members = ()=> {
                 <div className="table-heading">
                 <h1>BJJ Members</h1>
                 <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
-                <CSVLink data={bjjAttendace}>Download Excel</CSVLink>
+                {bjjAttendace.length===0 && <p onClick={()=>{generateCSV()}}>Generate Data</p> }
+                {bjjAttendace.length>0 && <CSVLink filename="BJJ Attendance" data={bjjAttendace}>Download Excel</CSVLink> }
                 </div>
 
 
@@ -168,6 +183,8 @@ const Members = ()=> {
                     <div className="table-heading">
                         <h1>Muay Thai Members</h1>
                         <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
+                        {mtAttendace.length===0 && <p onClick={()=>{generateCSV()}}>Generate Data</p> }
+                        {mtAttendace.length>0 && <CSVLink filename="Muay Thai Attendance" data={mtAttendace}>Download Excel</CSVLink> }
                     </div>
                     <div className="container">
                     

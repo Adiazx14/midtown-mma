@@ -715,6 +715,11 @@ abbr[title] {
   font-size: 2em;
 }
 
+.table-heading p, .table-heading a {
+  font-size: 2em;
+  cursor: pointer;
+}
+
 .reload-icon {
   fill: #fff;
   height: 2.1rem;
