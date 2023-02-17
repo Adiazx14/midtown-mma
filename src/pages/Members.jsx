@@ -138,8 +138,8 @@ const Members = ()=> {
                 <div className="table-heading">
                 <h1>BJJ Members</h1>
                 <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
-                {bjjAttendace.length===0 && <p onClick={()=>{generateCSV()}}>Generate Data</p> }
-                {bjjAttendace.length>0 && <CSVLink filename="BJJ Attendance" data={bjjAttendace}>Download Excel</CSVLink> }
+                {bjjAttendace.length===0 && <p onClick={()=>{generateCSV()}}>Generate Excel Table</p> }
+                {bjjAttendace.length>0 && <CSVLink filename="BJJ Attendance" data={bjjAttendace}>Download Table</CSVLink> }
                 </div>
 
 
@@ -183,8 +183,8 @@ const Members = ()=> {
                     <div className="table-heading">
                         <h1>Muay Thai Members</h1>
                         <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
-                        {mtAttendace.length===0 && <p onClick={()=>{generateCSV()}}>Generate Data</p> }
-                        {mtAttendace.length>0 && <CSVLink filename="Muay Thai Attendance" data={mtAttendace}>Download Excel</CSVLink> }
+                        {mtAttendace.length===0 && <p onClick={()=>{generateCSV()}}>Generate Excel Table</p> }
+                        {mtAttendace.length>0 && <CSVLink filename="Muay Thai Attendance" data={mtAttendace}>Download Table</CSVLink> }
                     </div>
                     <div className="container">
                     
