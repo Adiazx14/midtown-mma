@@ -43,7 +43,8 @@ const Members = ()=> {
 
     const generateCSV = ()=> {
         
-        const date = new Date()
+        var date = new Date()
+        date = new Date(date.getTime()-21600000)
         const dates = []
         for (let i = 0; i<30; i++) {
             if (date.getDay()!== 6) {
