@@ -7,6 +7,7 @@ import { db } from "../firebase.config"
 import {ReactComponent as EditIcon} from "../assets/edit_icon.svg"
 import {ReactComponent as ReloadIcon} from "../assets/reloadIcon.svg"
 import { bjjRanks, mtRanks } from "../ranks"
+import { CSVLink } from "react-csv"
 
 const Members = ()=> {
 
@@ -16,6 +17,9 @@ const Members = ()=> {
     const [editing, setEditing] = useState(false)
     const [fieldEdit, setFieldEdit] = useState(0)
     const [editedMember, setEditedMember] = useState({})
+    const [lastThirtyDates, setLastThirtyDays] = useState([])
+    const [bjjAttendace, setBjjAttendance] = useState([])
+    const [mtAttendace, setMtAttendance] = useState([])
 
 
     const fetchMembers = async()=>{
@@ -30,9 +34,36 @@ const Members = ()=> {
             if (parseInt(memberData.membership)>=1) {
                 mtMembersData.push({...memberData, uid:member.id})
             }
+            const bjjAtt = [memberData.name]
+            const mtAtt = [memberData.name]
+            lastThirtyDates.forEach(day=>{
+                if (memberData.bjjClasses.includes(day)) {
+                    bjjAtt.push("YES")
+                }
+                else {
+                    bjjAtt.push("NO")
+                }
+                if (memberData.mtClasses.includes(day)) {
+                    bjjAtt.push("YES")
+                }
+                else {
+                    mtAtt.push("NO")
+                }
+            })
+            if (bjjAtt.includes("YES")) {
+                setBjjAttendance(["adasd"])
+                console.log(bjjAttendace)
+
+            }
+            if (mtAtt.includes("YES")) {
+                setMtAttendance(prev=>[...prev, mtAtt])
+            }
+            
+            
         })
         setBjjMembers(bjjMembersData)
         setmMtMembers(mtMembersData)
+        setBjjAttendance(prev=>prev.splice(0,0, lastThirtyDates))
     }
 
     useEffect(()=>{
@@ -41,8 +72,19 @@ const Members = ()=> {
             toast.error("You are not authorized to access that page")
             navigate("/")
         }
-
+        const date = new Date()
+        const dates = []
+        for (let i = 0; i<30; i++) {
+            if (date.getDay()!== 6) {
+                dates.push(date.toJSON().slice(0,10))
+            }
+            date.setDate(date.getDate()-1)
+        }
+        dates.splice(0, 0, "Name")
+        setLastThirtyDays(dates)
         fetchMembers()
+
+
     },[])
 
     const membershipText = (membershipNumber) => {
@@ -82,7 +124,9 @@ const Members = ()=> {
                 <div className="table-heading">
                 <h1>BJJ Members</h1>
                 <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
+                <CSVLink data={bjjAttendace}>Download Excel</CSVLink>
                 </div>
+
 
                 <div className="container">
 	                <div className="table">
@@ -93,7 +137,7 @@ const Members = ()=> {
                             <div className="header__item">Rank</div>
                             <div className="header__item">Last Promotion Date</div>
                             </div>
-                        <div className="table-content">	
+                        <div className="table-content">
                             {bjjMembers.map(member=><div className="table-row">		
                                 <div className="table-data">
                                     <Link to={"/profile/"+member.uid}>
