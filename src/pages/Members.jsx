@@ -44,10 +44,9 @@ const Members = ()=> {
     const generateCSV = ()=> {
         
         var date = new Date()
-        date = new Date(date.getTime()-21600000)
         const dates = []
         for (let i = 0; i<30; i++) {
-            if (date.getDay()!== 6) {
+            if (date.getDay()!== 0) {
                 dates.push(date.toJSON().slice(0,10))
             }
             date.setDate(date.getDate()-1)
@@ -59,10 +58,10 @@ const Members = ()=> {
             dates.forEach(day=>{
                 console.log(day)
                 if (member.bjjClasses.includes(day)) {
-                    bjjAtt.push("YES")
+                    bjjAtt.push(1)
                 }
                 else {
-                    bjjAtt.push("NO")
+                    bjjAtt.push(0)
                 }
             })
             bjjAttendaceTemp.push(bjjAtt)
@@ -74,10 +73,10 @@ const Members = ()=> {
             dates.forEach(day=>{
                 console.log(day)
                 if (member.mtClasses.includes(day)) {
-                    mtAtt.push("YES")
+                    mtAtt.push(1)
                 }
                 else {
-                    mtAtt.push("NO")
+                    mtAtt.push(1)
                 }
             })
             mtAttendaceTemp.push(mtAtt)
