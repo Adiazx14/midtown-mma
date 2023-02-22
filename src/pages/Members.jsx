@@ -98,6 +98,7 @@ const Members = ()=> {
             navigate("/")
         }
         fetchMembers()
+        console.log(bjjMembers)
 
     },[])
 
@@ -130,6 +131,16 @@ const Members = ()=> {
         fetchMembers()
     }
 
+     const orderByNameAsc = ()=> {
+        const arr = [...bjjMembers]
+        arr.sort((a, b)=>a.name>b.name?1:-1)
+        setBjjMembers(arr)
+        console.log(bjjMembers)
+    } 
+    const orderByNameDesc = ()=> {
+        setBjjMembers(bjjMembers.sort((a, b)=>a.name>b.name?-1:1))
+    } 
+
 
     return (
         <div className="tables-div">
@@ -146,7 +157,7 @@ const Members = ()=> {
                 <div className="container">
 	                <div className="table">
                         <div className="table-header">
-                            <div className="header__item">Name</div>
+                            <div onClick={orderByNameAsc} className="header__item">Name</div>
                             <div className="header__item">Join Date</div>
                             <div className="header__item">Membership Type</div>
                             <div className="header__item">Rank</div>

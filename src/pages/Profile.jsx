@@ -1,5 +1,5 @@
 import { getAuth } from "firebase/auth"
-import { doc, getDoc, updateDoc } from "firebase/firestore"
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore"
 import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage'
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
@@ -20,6 +20,9 @@ const Profile = () => {
     const [user, setUser] = useState(auth.currentUser)
     const [loading, setLoading] = useState(true)
     const [userPic, setUserPic] = useState(null)
+    const [stUid, setStUid] = useState("")
+    const [dbUid, setdbUid] = useState("")
+
 
     const navigate = useNavigate()
     const params = useParams()
@@ -29,13 +32,22 @@ const Profile = () => {
             toast.error("You are not authorized to access that page")
             navigate("/")
         }
+        else setStUid(uid)
         const fetchUser = async () => {
             try {
                 const userRef = doc(db, "users", params.id)
                 const docSnap = await getDoc(userRef)
-                const data = docSnap.data()
-                setUser(data)
-                setLoading(false)
+                if (docSnap.exists()) {
+                    const data = docSnap.data()
+                    setUser(data)
+                    setdbUid(docSnap.id)
+                    setLoading(false)
+                }
+                else {
+                    alert("No user found with that ID")
+                    navigate("/")
+                }
+
             }
             catch(err){
                 console.log(err)
@@ -97,6 +109,14 @@ const Profile = () => {
 
     }
 
+    const deleteUser = async() => {
+        console.log(user)
+        const userRef = doc(db, "users", dbUid)
+        await deleteDoc(userRef)
+        toast.success("User deleted")
+        navigate("/members")
+    }
+
     return (
         <div className="">
             {!loading?
@@ -137,12 +157,13 @@ const Profile = () => {
                                 <p>Last promotion: {user.mtPromoted}</p>
                             </div>
                             }
-                            { (user.id === 6 || user.id===2 || user.id=== 145) &&
+                            { ((stUid=="WThS4cVfqdZypO04WkgRzsZA9pz2") || (stUid==="gryUf2y7DfdjiSYDS1ABZr1S8T72")) &&
                             <div className="links desk">
                                 <Link to={"/sign-up"}> Add a member </Link>
                                 <Link to={"/members"}>Members</Link>
                                 <Link to={"/attend"}>Attendance Pad</Link>
                                 <button  className="sign-out-link desk" onClick={signOut}>Log Out</button>
+                                <button  className="sign-out-link desk" onClick={deleteUser}>Delete this user</button>
                             </div>
                             }
                         </div>

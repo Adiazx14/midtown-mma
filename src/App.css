@@ -418,8 +418,7 @@ align-items: center;
 
 .rank-div {
   display: flex;
-  max-width: 65%;
-  flex-direction: column;  max-width: 65%;
+  flex-direction: column;
 }
 
 
