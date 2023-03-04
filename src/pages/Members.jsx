@@ -93,7 +93,7 @@ const Members = ()=> {
 
     useEffect(()=>{
         const uid = localStorage.getItem("uid")
-        if ((uid!=="WThS4cVfqdZypO04WkgRzsZA9pz2") && uid !== "gryUf2y7DfdjiSYDS1ABZr1S8T72" && uid !== "1joF1n0hmQSdiztegU0uZmy5I3e2") {
+        if ((uid!=="WThS4cVfqdZypO04WkgRzsZA9pz2") && uid !== "gryUf2y7DfdjiSYDS1ABZr1S8T72" && uid !== "JLZtYYmvT3UP7KTr44n9mIUbJDt2") {
             toast.error("You are not authorized to access that page")
             navigate("/")
         }
