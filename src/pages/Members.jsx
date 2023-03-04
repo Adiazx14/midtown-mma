@@ -71,13 +71,13 @@ const Members = ()=> {
         const mtAttendaceTemp = []
         mtMembers.forEach(member=>{
 
-            const mtAtt = [member.name]
+            const mtAtt = [member.name, member.id]
             dates.forEach(day=>{
                 if (member.mtClasses.includes(day)) {
                     mtAtt.push(1)
                 }
                 else {
-                    mtAtt.push(1)
+                    mtAtt.push(0)
                 }
             })
             mtAttendaceTemp.push(mtAtt)
@@ -199,7 +199,7 @@ const Members = ()=> {
                     <div className="table-heading">
                         <h1>Muay Thai Members</h1>
                         <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
-                        {mtAttendace.length===0 && <p onClick={()=>{generateCSV()}}>Generate Excel Table</p> }
+                        <p onClick={()=>{chooseMonth()}}>Generate Excel Table</p>
                         {mtAttendace.length>0 && <CSVLink filename="Muay Thai Attendance" data={mtAttendace}>Download Table</CSVLink> }
                     </div>
                     <div className="container">

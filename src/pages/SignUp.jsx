@@ -65,7 +65,7 @@ function SignUp() {
       })
       const count = await getDoc(userCountRef)
 
-      const formDataCopy = { ...formData, id: count.data().count}
+      const formDataCopy = { ...formData, id: count.data().count, profilePic:""}
       delete formDataCopy.password
       if (parseInt(membership)<1) {
         formDataCopy.mtPromoted= ""
