@@ -41,20 +41,20 @@ const Members = ()=> {
 /*         setBjjAttendance((prev)=>{ return prev.splice(0,0, lastThirtyDates)})
  */    }
 
-    const generateCSV = ()=> {
+    const generateCSV = (month) => {
         
         var date = new Date()
         const dates = []
-        for (let i = 0; i<30; i++) {
-            if (date.getDay()!== 0) {
-                dates.push(date.toJSON().slice(0,10))
-            }
-            date.setDate(date.getDate()-1)
+        const start = new Date(date.getFullYear(), month, 1)
+        const end = new Date(date.getFullYear(), month+1, 0 )
+        while (start<=end) {
+            dates.push(start.toJSON().slice(0,10))
+            start.setDate(start.getDate()+1)
         }
         const bjjAttendaceTemp = []
         bjjMembers.forEach(member=>{
 
-            const bjjAtt = [member.name]
+            const bjjAtt = [member.name, member.id]
             dates.forEach(day=>{
                 console.log(day)
                 if (member.bjjClasses.includes(day)) {
@@ -83,11 +83,13 @@ const Members = ()=> {
         })
         
         dates.splice(0, 0, "Name")
+        dates.splice(1, 0, "ID")
         bjjAttendaceTemp.splice(0,0, dates)
         mtAttendaceTemp.splice(0,0, dates)
         setBjjAttendance(bjjAttendaceTemp)
         setMtAttendance(mtAttendaceTemp)
-
+        setEditing(false)
+        
     }
 
 
@@ -142,6 +144,11 @@ const Members = ()=> {
     } 
 
 
+    const chooseMonth = () => {
+        setEditing(true)
+        setFieldEdit("csv")
+    }
+
     return (
         <div className="tables-div">
             {bjjMembers.length>0 && 
@@ -149,7 +156,7 @@ const Members = ()=> {
                 <div className="table-heading">
                 <h1>BJJ Members</h1>
                 <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
-                {bjjAttendace.length===0 && <p onClick={()=>{generateCSV()}}>Generate Excel Table</p> }
+                { <p onClick={()=>{chooseMonth()}}>Generate Excel Table</p> }
                 {bjjAttendace.length>0 && <CSVLink filename="BJJ Attendance" data={bjjAttendace}>Download Table</CSVLink> }
                 </div>
 
@@ -280,10 +287,33 @@ const Members = ()=> {
                 <select
                     className='formInput'
                     id={fieldEdit}
-                    value={editedMember[fieldEdit]}
                     onChange={async(e)=>await onChange(e, fieldEdit)}
                 >
               {mtRanks.map(rank=><option value={rank}>{rank}</option>)}
+
+                </select>
+            </div> 
+            }
+            {fieldEdit==="csv" &&   <div className="edit-form">
+                <label htmlFor={fieldEdit}>Choose a month</label>
+                <select
+                    className='formInput'
+                    id={fieldEdit}
+                    onChange={(e)=> generateCSV(parseInt(e.target.value)) }
+                >
+              <option value={"-1"} selected={true} disabled={true}>---</option> 
+              <option value="0">January</option>
+              <option value="1">February</option>
+              <option value="2">March</option>
+              <option value="3">April</option>
+              <option value="4">May</option>
+              <option value="5">June</option>
+              <option value="6">July</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9">October</option>
+              <option value="10">November</option>
+              <option value="11">December</option>
 
                 </select>
             </div> 
