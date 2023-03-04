@@ -8,6 +8,7 @@ import { db } from "../firebase.config";
 const Graph = ({bjjClasses, mtClasses}) => {
 
   const params = useParams()
+  console.log(bjjClasses)
   const [editing, setEditing] = useState(false)
   const [editedDay, setEditedDay] = useState("")
 

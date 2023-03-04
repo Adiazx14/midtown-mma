@@ -56,7 +56,7 @@ const Attend = () => {
         try {
             const userRef = collection(db, "users")
             const q = query(userRef,
-                where("ids", "array-contains", parseInt(uid))
+                where("id", "==", parseInt(uid))
                 )
             const docSnap = await getDocs(q)
             const docs = docSnap.docs
