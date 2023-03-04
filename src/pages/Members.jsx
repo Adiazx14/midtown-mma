@@ -28,13 +28,14 @@ const Members = ()=> {
         const mtMembersData = []
         docSnap.forEach(member=>{
             const memberData = member.data()
+            if (!memberData.ids) {
             if (memberData.membership!=="1") {
                 bjjMembersData.push({...memberData, uid:member.id})
             }
             if (parseInt(memberData.membership)>=1) {
                 mtMembersData.push({...memberData, uid:member.id})
             }
-                    
+        }
         })
         setBjjMembers(bjjMembersData)
         setmMtMembers(mtMembersData)
@@ -53,10 +54,11 @@ const Members = ()=> {
         }
         const bjjAttendaceTemp = []
         bjjMembers.forEach(member=>{
-
+            
             const bjjAtt = [member.name, member.id]
             dates.forEach(day=>{
-                console.log(day)
+                console.log(member)
+                console.log(member.bjjClasses)
                 if (member.bjjClasses.includes(day)) {
                     bjjAtt.push(1)
                 }
@@ -71,7 +73,6 @@ const Members = ()=> {
 
             const mtAtt = [member.name]
             dates.forEach(day=>{
-                console.log(day)
                 if (member.mtClasses.includes(day)) {
                     mtAtt.push(1)
                 }
@@ -89,7 +90,7 @@ const Members = ()=> {
         setBjjAttendance(bjjAttendaceTemp)
         setMtAttendance(mtAttendaceTemp)
         setEditing(false)
-        
+
     }
 
 
@@ -100,7 +101,6 @@ const Members = ()=> {
             navigate("/")
         }
         fetchMembers()
-        console.log(bjjMembers)
 
     },[])
 
@@ -123,9 +123,7 @@ const Members = ()=> {
     }
 
     const onChange = async(e, field) => {
-        console.log(field)
         const userRef = doc(db, "users", editedMember.uid)
-        console.log(userRef)
         await updateDoc(userRef, {
             [field]:e.target.value
         })
@@ -156,7 +154,7 @@ const Members = ()=> {
                 <div className="table-heading">
                 <h1>BJJ Members</h1>
                 <ReloadIcon onClick={()=>{window.location.reload()}} className="reload-icon"/>
-                { <p onClick={()=>{chooseMonth()}}>Generate Excel Table</p> }
+                 <p onClick={()=>{chooseMonth()}}>Generate Excel Table</p> 
                 {bjjAttendace.length>0 && <CSVLink filename="BJJ Attendance" data={bjjAttendace}>Download Table</CSVLink> }
                 </div>
 
@@ -299,9 +297,10 @@ const Members = ()=> {
                 <select
                     className='formInput'
                     id={fieldEdit}
+                    value={editedMember[fieldEdit]}
                     onChange={(e)=> generateCSV(parseInt(e.target.value)) }
                 >
-              <option value={"-1"} selected={true} disabled={true}>---</option> 
+
               <option value="0">January</option>
               <option value="1">February</option>
               <option value="2">March</option>
@@ -328,3 +327,23 @@ const Members = ()=> {
 }
 
 export default Members
+
+/*                             {bjjMembers.map(member=> member.memberships.map((member)=>{return <div className="table-row">		
+                                <div className="table-data">
+                                    <Link to={"/profile/"+member.uid}>
+                                        {member.name}
+                                    </Link>
+                                </div>
+                                <div className="table-data">{member.joinDate}
+                                   <EditIcon onClick={()=>{edit("joinDate", member)}} className="edit-icon"/>
+                                </div>
+                                <div className="table-data">{membershipText(member.membership)}
+                                   <EditIcon onClick={()=>{edit("membership", member)}} className="edit-icon"/>
+                                </div>
+                                <div className="table-data">{member.bjjRank}
+                                   <EditIcon onClick={()=>{edit("bjjRank",  member)}} className="edit-icon"/>
+                                </div>
+                                <div className="table-data">{member.bjjPromoted}
+                                   <EditIcon onClick={()=>{edit("bjjPromoted",  member)}} className="edit-icon"/>
+                                </div>
+                            </div>}))} */
