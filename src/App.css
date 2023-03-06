@@ -481,6 +481,10 @@ abbr[title] {
 .react-calendar__tile--active{
   background-color: #246030 !important;
 }
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #000 !important;
+}
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
  background: #f8f8fa;

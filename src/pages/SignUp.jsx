@@ -5,6 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
+  signInWithEmailAndPassword,
 } from 'firebase/auth'
 import { setDoc, doc, serverTimestamp, updateDoc, increment, getDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
@@ -41,47 +42,70 @@ function SignUp() {
     }))
   }
 
+  const createMembership = async() => {
+    const userCountRef = doc(db, "userCount", "MlJ9crFv8QgUurfFxFE5")
+    await updateDoc(userCountRef, {
+        count: increment(1)
+    })
+    const count = await getDoc(userCountRef)
+    const id = count.data().count
+    const formDataCopy = { ...formData, id}
+    delete formDataCopy.password
+    delete formDataCopy.email
+    if (parseInt(membership)<1) {
+      formDataCopy.mtPromoted= ""
+      formDataCopy.mtRank= ""
+      formDataCopy.mtClasses = []
+    }
+    if (parseInt(membership)===1) {
+      formDataCopy.bjjPromoted= ""
+      formDataCopy.bjjRank= ""
+      formDataCopy.bjjClasses = []
+    }
+    return formDataCopy
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault()
-
+    const auth = getAuth()  
     try {
-      const auth = getAuth()
+          
 
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       )
-
-      const user = userCredential.user
       
       updateProfile(auth.currentUser, {
         displayName: name,
       })
+      const formDataCopy = await createMembership()
+      await setDoc(doc(db, 'users', userCredential.user.uid), {email, ids:[formDataCopy.id], memberships:{[formDataCopy.id]:formDataCopy}})
 
-      const userCountRef = doc(db, "userCount", "MlJ9crFv8QgUurfFxFE5")
-      await updateDoc(userCountRef, {
-          count: increment(1)
-      })
-      const count = await getDoc(userCountRef)
-
-      const formDataCopy = { ...formData, id: count.data().count}
-      delete formDataCopy.password
-      if (parseInt(membership)<1) {
-        formDataCopy.mtPromoted= ""
-        formDataCopy.mtRank= ""
-        formDataCopy.mtClasses = []
-      }
-      if (parseInt(membership)===1) {
-        formDataCopy.bjjPromoted= ""
-        formDataCopy.bjjRank= ""
-        formDataCopy.bjjClasses = []
-      }
-      await setDoc(doc(db, 'users', user.uid), formDataCopy)
-
-      navigate('/profile/'+ user.uid)
+      navigate('/profile/'+ userCredential.user.uid)
     } catch (error) {
-      toast.error('Something went wrong with registration')
+      if (error.code === "auth/email-already-in-use") {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        )
+        const formDataCopy = await createMembership()
+        const userRef = doc(db, "users", userCredential.user.uid)
+        const userSnap = await getDoc(userRef)
+        if (userSnap.exists()) {
+          const user = userSnap.data()
+          const ids = [...user.ids, formDataCopy.id]
+          const memberships = {...user.memberships, [formDataCopy.id]:formDataCopy}
+          await updateDoc(doc(db, 'users', userCredential.user.uid), {ids, memberships})
+        }
+        navigate('/profile/'+ userCredential.user.uid)
+      }
+      else {
+        toast.error('Something went wrong with registration')
+        console.log(error)
+      }
     }
   }
 

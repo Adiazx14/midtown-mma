@@ -75,7 +75,15 @@ const Membership = ({user, loggedUserId, profileUserId}) => {
     const deleteUser = async() => {
         console.log(user)
         const userRef = doc(db, "users", profileUserId)
-        await deleteDoc(userRef)
+        const userSnap = await getDoc(userRef)
+        if (userSnap.exists()) {
+            const userData = userSnap.data()
+            const ids = userData.ids.filter(id=>id!==user.id)
+            const memberships = userData.memberships
+            delete memberships[user.id]
+            await updateDoc(userRef, {ids, memberships})
+        }
+        
         toast.success("User deleted")
         navigate("/members")
     }
