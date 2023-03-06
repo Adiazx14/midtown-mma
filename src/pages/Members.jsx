@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore"
+import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { useState } from "react"
 import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -26,17 +26,30 @@ const Members = ()=> {
         const docSnap = await getDocs(query(collection(db,"users")))
         const bjjMembersData = []
         const mtMembersData = []
-        docSnap.forEach(member=>{
-            const memberData = member.data()
-            if (!memberData.ids) {
-            if (memberData.membership!=="1") {
-                bjjMembersData.push({...memberData, uid:member.id})
-            }
-            if (parseInt(memberData.membership)>=1) {
-                mtMembersData.push({...memberData, uid:member.id})
-            }
-        }
+        docSnap.forEach((member)=>{
+            const memberData = member.data() 
+            Object.values(memberData.memberships).forEach((membership)=>{
+                if (membership.membership!=="1") {
+                    bjjMembersData.push({...membership, uid:member.id})
+                }
+                if (parseInt(membership.membership)>=1) {
+                    mtMembersData.push({...membership, uid:member.id})  
+                } 
+            })
+
+        /*
+        const memberships = {}
+        const updatedUser = {...memberData}
+        delete updatedUser["email"]
+        memberships[memberData.id] = updatedUser
+        console.log(memberships) 
+        const updateRef = {memberships, email:memberData.email, ids:[memberData.id]}
+                    console.log(updateRef)
+        await setDoc(doc(db, "users", member.id), updateRef)
+        */
         })
+        console.log(bjjMembersData)
+        console.log(mtMembersData)
         setBjjMembers(bjjMembersData)
         setmMtMembers(mtMembersData)
 /*         setBjjAttendance((prev)=>{ return prev.splice(0,0, lastThirtyDates)})

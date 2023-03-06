@@ -5,18 +5,18 @@ import 'react-calendar/dist/Calendar.css';
 import { useParams } from "react-router-dom";
 import { db } from "../firebase.config";
 
-const Graph = ({bjjClasses, mtClasses}) => {
+const Graph = ({bjjClasses, mtClasses, id}) => {
 
   const params = useParams()
-  console.log(bjjClasses)
   const [editing, setEditing] = useState(false)
   const [editedDay, setEditedDay] = useState("")
 
   const editDay = (day)=> {
     const uid = localStorage.getItem("uid")
-    if (uid === "WThS4cVfqdZypO04WkgRzsZA9pz2" || uid === "gryUf2y7DfdjiSYDS1ABZr1S8T72") {
+    if (uid === "WThS4cVfqdZypO04WkgRzsZA9pz2" || uid === "gryUf2y7DfdjiSYDS1ABZr1S8T72" || uid=== "JLZtYYmvT3UP7KTr44n9mIUbJDt2") {
       setEditing(true)
       setEditedDay(day.toJSON().slice(0, 10))
+      console.log(id)
     }
   }
 
@@ -24,29 +24,32 @@ const Graph = ({bjjClasses, mtClasses}) => {
     const userRef = doc(db, "users", params.id)
     const snapDoc = await getDoc(userRef)
     const user = snapDoc.data()
-    const newBjj = [...user.bjjClasses, editedDay]
-    const newMt = [...user.mtClasses, editedDay]
-    const removedBjj = user.bjjClasses.filter(day=>day!==editedDay)
-    const removedMt = user.mtClasses.filter(day=>day!==editedDay)
+
+    const newBjj = [...user.memberships[id].bjjClasses, editedDay]
+    const newMt = [...user.memberships[id].mtClasses, editedDay]
+    const removedBjj = user.memberships[id].bjjClasses.filter(day=>day!==editedDay)
+    const removedMt = user.memberships[id].mtClasses.filter(day=>day!==editedDay)
+    let newMemberships = {}
     switch (classType) {
       case "bjj":
-        await updateDoc(userRef, {
-          bjjClasses: newBjj
+          newMemberships = {...user.memberships, [id]:{...user.memberships[id], bjjClasses:newBjj}}
+          await updateDoc(userRef, {
+          memberships: newMemberships
         }); break
         case "mt":
-
+          newMemberships = {...user.memberships, [id]:{...user.memberships[id], mtClasses:newMt}}
           await updateDoc(userRef, {
-            mtClasses: newMt
+            memberships: newMemberships
           }); break
         case "both":
-        await updateDoc(userRef, {
-          bjjClasses: newBjj,
-          mtClasses: newMt
-        }); break
-        default:
+          newMemberships = {...user.memberships, [id]:{...user.memberships[id], bjjClasses:newBjj, mtClasses:newMt}}
           await updateDoc(userRef, {
-            bjjClasses: removedBjj,
-            mtClasses: removedMt
+            memberships: newMemberships
+          }); break
+        default:
+          newMemberships = {...user.memberships, [id]:{...user.memberships[id], bjjClasses:removedBjj, mtClasses:removedMt}}
+          await updateDoc(userRef, {
+            memberships: newMemberships
           }); break
     }
     setEditing(false)
