@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { useState } from "react"
 import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -37,19 +37,8 @@ const Members = ()=> {
                 } 
             })
 
-        /*
-        const memberships = {}
-        const updatedUser = {...memberData}
-        delete updatedUser["email"]
-        memberships[memberData.id] = updatedUser
-        console.log(memberships) 
-        const updateRef = {memberships, email:memberData.email, ids:[memberData.id]}
-                    console.log(updateRef)
-        await setDoc(doc(db, "users", member.id), updateRef)
-        */
         })
-        console.log(bjjMembersData)
-        console.log(mtMembersData)
+
         setBjjMembers(bjjMembersData)
         setmMtMembers(mtMembersData)
 /*         setBjjAttendance((prev)=>{ return prev.splice(0,0, lastThirtyDates)})
@@ -70,8 +59,7 @@ const Members = ()=> {
             
             const bjjAtt = [member.name, member.id]
             dates.forEach(day=>{
-                console.log(member)
-                console.log(member.bjjClasses)
+
                 if (member.bjjClasses.includes(day)) {
                     bjjAtt.push(1)
                 }
@@ -137,18 +125,26 @@ const Members = ()=> {
 
     const onChange = async(e, field) => {
         const userRef = doc(db, "users", editedMember.uid)
-        await updateDoc(userRef, {
-            [field]:e.target.value
-        })
-        setEditing(false)
-        fetchMembers()
+        const userSnap = await getDoc(userRef)
+        console.log(e.target.value)
+        if (userSnap.exists()) {
+            const user = userSnap.data()
+            console.log(editedMember.id)
+            const newMemberships = {...user.memberships, [editedMember.id]:{...user.memberships[editedMember.id], [field]:e.target.value}}
+            console.log(newMemberships)
+            await updateDoc(userRef, {
+                memberships: newMemberships
+            })
+            setEditing(false)
+            fetchMembers()
+        }
+
     }
 
      const orderByNameAsc = ()=> {
         const arr = [...bjjMembers]
         arr.sort((a, b)=>a.name>b.name?1:-1)
         setBjjMembers(arr)
-        console.log(bjjMembers)
     } 
     const orderByNameDesc = ()=> {
         setBjjMembers(bjjMembers.sort((a, b)=>a.name>b.name?-1:1))
@@ -261,7 +257,7 @@ const Members = ()=> {
                     type='date'
                     className='formInput'
                     id={fieldEdit}
-                    value={editedMember[fieldEdit]}
+                    defaultValue={editedMember[fieldEdit]}
                     onChange={async(e)=>await onChange(e, fieldEdit)}
                 />
             </div>
@@ -271,7 +267,7 @@ const Members = ()=> {
                 <select
                     className='formInput'
                     id={fieldEdit}
-                    value={editedMember[fieldEdit]}
+                    defaultValue={editedMember[fieldEdit]}
                     onChange={async(e)=>await onChange(e, fieldEdit)}
                 >
             <option value={0}>Jiu-Jitsu</option>
@@ -285,7 +281,7 @@ const Members = ()=> {
                 <select
                     className='formInput'
                     id={fieldEdit}
-                    value={editedMember[fieldEdit]}
+                    defaultValue={editedMember[fieldEdit]}
                     onChange={async(e)=>await onChange(e, fieldEdit)}
                 >
               {bjjRanks.map(rank=><option value={rank}>{rank}</option>)}
@@ -298,6 +294,7 @@ const Members = ()=> {
                 <select
                     className='formInput'
                     id={fieldEdit}
+                    defaultValue={editedMember[fieldEdit]}
                     onChange={async(e)=>await onChange(e, fieldEdit)}
                 >
               {mtRanks.map(rank=><option value={rank}>{rank}</option>)}
