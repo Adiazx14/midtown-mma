@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
+import { collection, deleteField, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { useState } from "react"
 import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -26,9 +26,10 @@ const Members = ()=> {
         const docSnap = await getDocs(query(collection(db,"users")))
         const bjjMembersData = []
         const mtMembersData = []
-        docSnap.forEach((member)=>{
-            const memberData = member.data() 
+        docSnap.forEach(async(member)=>{
+            const memberData = member.data()
             Object.values(memberData.memberships).forEach((membership)=>{
+
                 if (membership.membership!=="1") {
                     bjjMembersData.push({...membership, uid:member.id})
                 }
@@ -36,7 +37,15 @@ const Members = ()=> {
                     mtMembersData.push({...membership, uid:member.id})  
                 } 
             })
-
+  
+            
+ /*               
+           const old_memberships = memberData.memberships
+            console.log(old_memberships)
+ updateDoc(doc(db, "users", member.id), 
+            {
+                memberships: new_memberships
+            })   */
         })
 
         setBjjMembers(bjjMembersData)
@@ -56,7 +65,8 @@ const Members = ()=> {
         }
         const bjjAttendaceTemp = []
         bjjMembers.forEach(member=>{
-            
+            if (member.status === "Active") {
+
             const bjjAtt = [member.name, member.id]
             dates.forEach(day=>{
 
@@ -68,20 +78,23 @@ const Members = ()=> {
                 }
             })
             bjjAttendaceTemp.push(bjjAtt)
+            }
         })
         const mtAttendaceTemp = []
         mtMembers.forEach(member=>{
-
-            const mtAtt = [member.name, member.id]
-            dates.forEach(day=>{
-                if (member.mtClasses.includes(day)) {
-                    mtAtt.push(1)
-                }
-                else {
-                    mtAtt.push(0)
-                }
-            })
-            mtAttendaceTemp.push(mtAtt)
+            if (member.status === "Active")
+            {
+                const mtAtt = [member.name, member.id]
+                dates.forEach(day=>{
+                    if (member.mtClasses.includes(day)) {
+                        mtAtt.push(1)
+                    }
+                    else {
+                        mtAtt.push(0)
+                    }
+                })
+                mtAttendaceTemp.push(mtAtt)
+            }
         })
         
         dates.splice(0, 0, "Name")
@@ -174,6 +187,7 @@ const Members = ()=> {
                             <div onClick={orderByNameAsc} className="header__item">Name</div>
                             <div className="header__item">Join Date</div>
                             <div className="header__item">Membership Type</div>
+                            <div className="header__item">Membership Status</div>
                             <div className="header__item">Rank</div>
                             <div className="header__item">Last Promotion Date</div>
                             </div>
@@ -189,6 +203,9 @@ const Members = ()=> {
                                 </div>
                                 <div className="table-data">{membershipText(member.membership)}
                                    <EditIcon onClick={()=>{edit("membership", member)}} className="edit-icon"/>
+                                </div>
+                                <div className="table-data">{member.status}
+                                   <EditIcon onClick={()=>{edit("status", member)}} className="edit-icon"/>
                                 </div>
                                 <div className="table-data">{member.bjjRank}
                                    <EditIcon onClick={()=>{edit("bjjRank",  member)}} className="edit-icon"/>
@@ -218,6 +235,7 @@ const Members = ()=> {
                         <div className="header__item">Name</div>
                         <div className="header__item">Join Date</div>
                         <div className="header__item">Membership Type</div>
+                        <div className="header__item">Membership Status</div>
                         <div className="header__item">Rank</div>
                         <div className="header__item">Last Promotion Date</div>
                         </div>
@@ -233,6 +251,9 @@ const Members = ()=> {
                                 </div>
                                 <div className="table-data">{membershipText(member.membership)}
                                    <EditIcon onClick={()=>{edit("membership", member)}} className="edit-icon"/>
+                                </div>
+                                <div className="table-data">{member.status}
+                                   <EditIcon onClick={()=>{edit("status", member)}} className="edit-icon"/>
                                 </div>
                                 <div className="table-data">{member.mtRank}
                                    <EditIcon onClick={()=>{edit("mtRank",  member)}} className="edit-icon"/>
@@ -273,6 +294,19 @@ const Members = ()=> {
             <option value={0}>Jiu-Jitsu</option>
             <option value={1}>Muay Thai</option>
             <option value={2}>Jiu-Jitsu & Muay Thai</option>
+                </select>
+            </div> 
+            }
+            {fieldEdit==="status" &&   <div className="edit-form">
+                <label htmlFor={fieldEdit}>Membership Status</label>
+                <select
+                    className='formInput'
+                    id={fieldEdit}
+                    defaultValue={editedMember[fieldEdit]}
+                    onChange={async(e)=>await onChange(e, fieldEdit)}
+                >
+            <option value={"Active"}>Active</option>
+            <option value={"Inactive"}>Inactive</option>
                 </select>
             </div> 
             }
