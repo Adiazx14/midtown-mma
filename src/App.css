@@ -723,6 +723,10 @@ abbr[title] {
   cursor: pointer;
 }
 
+.table-header div:first-child {
+  cursor: pointer;
+}
+
 .reload-icon {
   fill: #fff;
   height: 2.1rem;

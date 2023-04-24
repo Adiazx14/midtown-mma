@@ -1,4 +1,4 @@
-import { collection, deleteField, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
+import { collection, deleteField, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from "firebase/firestore"
 import { useState } from "react"
 import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -12,8 +12,10 @@ import { CSVLink } from "react-csv"
 const Members = ()=> {
 
     const navigate = useNavigate()
+    const [bjjOrder, setBjjOrder] = useState("alph")
+    const [mtOrder, setMtOrder] = useState("alph")
     const [bjjMembers, setBjjMembers] = useState([])
-    const [mtMembers, setmMtMembers] = useState([])
+    const [mtMembers, setMtMembers] = useState([])
     const [editing, setEditing] = useState(false)
     const [fieldEdit, setFieldEdit] = useState(0)
     const [editedMember, setEditedMember] = useState({})
@@ -22,11 +24,26 @@ const Members = ()=> {
 
 
 
+    const orderByNameAsc = async(sport) => {
+        if (sport==="bjj") {
+            const arr = [...bjjMembers]
+            arr.sort((a, b)=>a.name>b.name?1:-1)
+            setBjjMembers(arr)
+            setBjjOrder("alph")
+        }
+        else {
+            const arr = [...mtMembers]
+            arr.sort((a, b)=>a.name>b.name?1:-1)
+            setMtMembers(arr)
+            setMtOrder("alph")
+        }
+    } 
+
     const fetchMembers = async()=>{
         const docSnap = await getDocs(query(collection(db,"users")))
         const bjjMembersData = []
         const mtMembersData = []
-        docSnap.forEach(async(member)=>{
+         docSnap.forEach(async(member)=>{
             const memberData = member.data()
             Object.values(memberData.memberships).forEach((membership)=>{
 
@@ -37,21 +54,58 @@ const Members = ()=> {
                     mtMembersData.push({...membership, uid:member.id})  
                 } 
             })
-  
-            
- /*               
-           const old_memberships = memberData.memberships
-            console.log(old_memberships)
- updateDoc(doc(db, "users", member.id), 
-            {
-                memberships: new_memberships
-            })   */
+        
         })
 
         setBjjMembers(bjjMembersData)
-        setmMtMembers(mtMembersData)
+        setMtMembers(mtMembersData)
 /*         setBjjAttendance((prev)=>{ return prev.splice(0,0, lastThirtyDates)})
  */    }
+
+
+
+    useEffect(()=>{
+        const uid = localStorage.getItem("uid")
+        if ((uid!=="WThS4cVfqdZypO04WkgRzsZA9pz2") && uid !== "gryUf2y7DfdjiSYDS1ABZr1S8T72" && uid !== "JLZtYYmvT3UP7KTr44n9mIUbJDt2") {
+            toast.error("You are not authorized to access that page")
+            navigate("/")
+        }
+        fetchMembers()
+
+    },[])
+
+    useEffect(()=> {
+        const unsub = onSnapshot(collection(db, "users"), { includeMetadataChanges: true }, (docSnap)=>{
+            const bjjMembersData = []
+            const mtMembersData = []
+            docSnap.forEach(async(member)=>{
+                const memberData = member.data()
+                Object.values(memberData.memberships).forEach((membership)=>{
+    
+                    if (membership.membership!=="1") {
+                        bjjMembersData.push({...membership, uid:member.id})
+                    }
+                    if (parseInt(membership.membership)>=1) {
+                        mtMembersData.push({...membership, uid:member.id})  
+                    } 
+                })
+            
+            })
+            console.log(bjjOrder)
+            console.log("smt")
+            if (bjjOrder === "alph") {
+                bjjMembersData.sort((a, b)=>a.name>b.name?1:-1)
+            }
+            if (mtOrder === "alph") {
+                mtMembersData.sort((a, b)=>a.name>b.name?1:-1)
+            }
+            setBjjMembers(bjjMembersData)
+            setMtMembers(mtMembersData)
+        })
+
+        return unsub
+    }, [])
+
 
     const generateCSV = (month) => {
         
@@ -108,15 +162,7 @@ const Members = ()=> {
     }
 
 
-    useEffect(()=>{
-        const uid = localStorage.getItem("uid")
-        if ((uid!=="WThS4cVfqdZypO04WkgRzsZA9pz2") && uid !== "gryUf2y7DfdjiSYDS1ABZr1S8T72" && uid !== "JLZtYYmvT3UP7KTr44n9mIUbJDt2") {
-            toast.error("You are not authorized to access that page")
-            navigate("/")
-        }
-        fetchMembers()
 
-    },[])
 
     const membershipText = (membershipNumber) => {
         if (membershipNumber==="0") {
@@ -131,37 +177,33 @@ const Members = ()=> {
     }
 
     const edit = (field, member) => {
-        setEditing(true)
         setFieldEdit(field)
         setEditedMember(member)
+        setEditing(true)
     }
 
     const onChange = async(e, field) => {
         const userRef = doc(db, "users", editedMember.uid)
         const userSnap = await getDoc(userRef)
-        console.log(e.target.value)
         if (userSnap.exists()) {
             const user = userSnap.data()
-            console.log(editedMember.id)
             const newMemberships = {...user.memberships, [editedMember.id]:{...user.memberships[editedMember.id], [field]:e.target.value}}
-            console.log(newMemberships)
             await updateDoc(userRef, {
                 memberships: newMemberships
             })
             setEditing(false)
-            fetchMembers()
+
+           /*  await fetchMembers()
+            if (bjjOrder === "alph") {
+                orderByNameAsc("bjj")
+            }
+            if (mtOrder === "alph") {
+                orderByNameAsc("mt")
+            } */
+
         }
 
     }
-
-     const orderByNameAsc = ()=> {
-        const arr = [...bjjMembers]
-        arr.sort((a, b)=>a.name>b.name?1:-1)
-        setBjjMembers(arr)
-    } 
-    const orderByNameDesc = ()=> {
-        setBjjMembers(bjjMembers.sort((a, b)=>a.name>b.name?-1:1))
-    } 
 
 
     const chooseMonth = () => {
@@ -184,7 +226,7 @@ const Members = ()=> {
                 <div className="container">
 	                <div className="table">
                         <div className="table-header">
-                            <div onClick={orderByNameAsc} className="header__item">Name</div>
+                            <div onClick={()=>{orderByNameAsc("bjj")}} className="header__item">Name</div>
                             <div className="header__item">Join Date</div>
                             <div className="header__item">Membership Type</div>
                             <div className="header__item">Membership Status</div>
@@ -232,7 +274,7 @@ const Members = ()=> {
                     
                     <div className="table">
                     <div className="table-header">
-                        <div className="header__item">Name</div>
+                        <div onClick={()=>{orderByNameAsc("mt")}} className="header__item">Name</div>
                         <div className="header__item">Join Date</div>
                         <div className="header__item">Membership Type</div>
                         <div className="header__item">Membership Status</div>
