@@ -73,7 +73,6 @@ const Membership = ({user, loggedUserId, profileUserId}) => {
     }
 
     const deleteUser = async() => {
-        console.log(user)
         const userRef = doc(db, "users", profileUserId)
         const userSnap = await getDoc(userRef)
         if (userSnap.exists()) {

@@ -91,8 +91,7 @@ const Members = ()=> {
                 })
             
             })
-            console.log(bjjOrder)
-            console.log("smt")
+
             if (bjjOrder === "alph") {
                 bjjMembersData.sort((a, b)=>a.name>b.name?1:-1)
             }

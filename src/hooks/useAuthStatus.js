@@ -5,6 +5,7 @@ const useAuthStatus = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [isAdmin, setIsAdmin] = useState(false)
     const isMounted = useRef(true)
     
     
@@ -15,6 +16,9 @@ const useAuthStatus = () => {
             onAuthStateChanged(auth, (user)=>{
                 console.log(user)
                 if (user) {
+                    if (["WThS4cVfqdZypO04WkgRzsZA9pz2","gryUf2y7DfdjiSYDS1ABZr1S8T72","JLZtYYmvT3UP7KTr44n9mIUbJDt2"].includes(user.uid)) {
+                        setIsAdmin(true)
+                    }
                     setIsLoggedIn(true)
                 }
                 setLoading(false)
@@ -25,7 +29,7 @@ const useAuthStatus = () => {
 
     }, [isMounted])
 
-    return {isLoggedIn, loading}
+    return {isLoggedIn, loading, isAdmin}
 
 }
 

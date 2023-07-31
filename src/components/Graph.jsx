@@ -16,7 +16,6 @@ const Graph = ({bjjClasses, mtClasses, id}) => {
     if (uid === "WThS4cVfqdZypO04WkgRzsZA9pz2" || uid === "gryUf2y7DfdjiSYDS1ABZr1S8T72" || uid=== "JLZtYYmvT3UP7KTr44n9mIUbJDt2") {
       setEditing(true)
       setEditedDay(day.toJSON().slice(0, 10))
-      console.log(id)
     }
   }
 

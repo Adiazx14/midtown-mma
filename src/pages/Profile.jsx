@@ -32,21 +32,9 @@ const Profile = () => {
                 const docSnap = await getDoc(userRef)
                 if (docSnap.exists()) {
                     const data = docSnap.data()
-                    console.log(data)
                     setUser(data)
-                    /* const memberships = []
-                    const updatedUser = {...data}
-                    delete updatedUser["email"]
-                    memberships.push(updatedUser)
-                    console.log(memberships) 
-                    const updateRef = {memberships, email:data.email}
-                    console.log(updateRef)
-                    await setDoc(userRef, updateRef) 
-                    */
-/*                    const ships =  Object.entries(data.memberships[0])
-                   console.log(ships) */
+
                     setProfileUserId(docSnap.id)
-                    console.log(Object.entries(data.memberships))
                     setLoading(false)
                 }
 
@@ -61,10 +49,6 @@ const Profile = () => {
             }
         }
         fetchUser()
-        console.log(user)
-
-
-
     },[])
 
 

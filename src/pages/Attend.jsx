@@ -28,8 +28,7 @@ const Attend = () => {
     const log = async() => {
         if (!(sport==="mtClasses" && parseInt(user.membership)<1) && !(sport==="bjjClasses" && user.membership==="1")) {
             const classes = user.memberships[id][sport]
-            var timeStamp = new Date()
-            console.log(timeStamp.toJSON())
+            let timeStamp = new Date()
             timeStamp = new Date(timeStamp.getTime()-21600000).toJSON().slice(0,10)
             if (!classes.includes(timeStamp)) {
                 classes.push(timeStamp)
@@ -57,7 +56,6 @@ const Attend = () => {
          
         try {
             const userRef = collection(db, "users")
-            console.log(id)
             const q = query(userRef,
                 where("ids", "array-contains", parseInt(id))
                 )
