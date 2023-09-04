@@ -127,9 +127,6 @@ const Membership = ({user, loggedUserId, profileUserId}) => {
                 }
                 { ((loggedUserId==="WThS4cVfqdZypO04WkgRzsZA9pz2") || (loggedUserId==="gryUf2y7DfdjiSYDS1ABZr1S8T72") || (loggedUserId==="JLZtYYmvT3UP7KTr44n9mIUbJDt2")) &&
                 <div className="links desk">
-                    <Link to={"/sign-up"}> Add a member </Link>
-                    <Link to={"/members"}>Members</Link>
-                    <Link to={"/attend"}>Attendance Pad</Link>
                     <button  className="sign-out-link desk" onClick={signOut}>Log Out</button>
                     <button  className="sign-out-link desk" onClick={deleteUser}>Delete this user</button>
                 </div>

@@ -11,8 +11,8 @@ import { setDoc, doc, serverTimestamp, updateDoc, increment, getDoc } from 'fire
 import { db } from '../firebase.config'
 import { ReactComponent as ArrowRightIcon } from '../assets/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/visibilityIcon.svg'
-import { useEffect } from 'react'
 import { bjjRanks, mtRanks } from '../ranks'
+import Navbar from '../components/Navbar'
 
 function SignUp() {
 
@@ -111,6 +111,7 @@ function SignUp() {
 
   return (
     <>
+    <Navbar/>
       <div className='pageContainer'>
 
         <form className='sign-form' onSubmit={onSubmit}>

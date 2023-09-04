@@ -8,6 +8,7 @@ import {ReactComponent as EditIcon} from "../assets/edit_icon.svg"
 import {ReactComponent as ReloadIcon} from "../assets/reloadIcon.svg"
 import { bjjRanks, mtRanks } from "../ranks"
 import { CSVLink } from "react-csv"
+import Navbar from "../components/Navbar"
 
 const Members = ()=> {
 
@@ -211,6 +212,8 @@ const Members = ()=> {
     }
 
     return (
+        <>
+        <Navbar/>
         <div className="tables-div">
             {bjjMembers.length>0 && 
             <div className="bjj-table">
@@ -408,6 +411,7 @@ const Members = ()=> {
         </div>
         </div>
         </div>
+    </>
     )
 }
 

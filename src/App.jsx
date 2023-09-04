@@ -14,8 +14,6 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <>
-    <div className="asfafds">afadf</div>
-      <Navbar/>
       <Router>
         <Routes>
           <Route path='/' element={<SignIn/>}/>

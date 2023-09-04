@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { db } from "../firebase.config"
 import { toast } from "react-toastify"
 import Membership from "../components/Membership"
+import Navbar from "../components/Navbar"
 
 
 const Profile = () => {
@@ -56,6 +57,7 @@ const Profile = () => {
 
     return (
         <div className="">
+            <Navbar/>
             {!loading? Object.values(user.memberships).map((membership)=><Membership loggedUserId={loggedUserId} profileUserId={profileUserId} id={membership.id} user={membership}/>)
 
                 : <h1>Loading</h1>

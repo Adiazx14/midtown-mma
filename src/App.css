@@ -1,13 +1,13 @@
 :root {
-  --gray : #12121c;
-  --yellow: #FFF86C;
+  --gray: #12121c;
+  --yellow: #fff86c;
 }
 
 * {
   box-sizing: border-box;
-  margin:0;
+  margin: 0;
   padding: 0;
-  font-family: "Helvetica",Verdana,Arial,sans-serif;
+  font-family: "Helvetica", Verdana, Arial, sans-serif;
   text-align: center;
   font-size: 1em;
 }
@@ -44,7 +44,6 @@ body {
 
 .sign-form div {
   text-align: left;
-
 }
 
 .sign-form label {
@@ -69,10 +68,10 @@ button {
 
 /* Attend */
 
-.center{
+.center {
   border-radius: 20px;
 }
-.attend-text-input{
+.attend-text-input {
   height: 60px;
   width: 75%;
   margin-top: 10px;
@@ -83,9 +82,9 @@ button {
   font-weight: bold;
   text-align: right;
   padding-right: 20px;
-  background: linear-gradient(#d1dce0,#dfe6e9);
+  background: linear-gradient(#d1dce0, #dfe6e9);
 }
-form .buttons{
+form .buttons {
   padding: 10px 0;
 }
 
@@ -97,7 +96,7 @@ img {
   height: 8vh;
 }
 
-input[type="button"]{
+input[type="button"] {
   width: 20%;
   height: 70px;
   margin: 5px;
@@ -107,11 +106,11 @@ input[type="button"]{
   border: 1px solid #d9d9d9;
   background: linear-gradient(#d9d9d9, #bfbfbf);
 }
-input[type="button"]:hover{
-  transition: .5s;
+input[type="button"]:hover {
+  transition: 0.5s;
   background: linear-gradient(#bfbfbf, #d9d9d9);
 }
-input#clear{
+input#clear {
   background: #ff1a1a;
   border: 1px solid #cc0000;
   color: white;
@@ -128,9 +127,8 @@ input#delete {
   display: flex;
   justify-content: center;
   gap: 2vw;
-  
 }
-input.log-btn{
+input.log-btn {
   width: 40%;
   margin: 10px 0 10px 0;
   font-size: 30px;
@@ -141,7 +139,6 @@ input.log-btn{
 }
 #display {
   color: var(--gray);
-
 }
 input.log-btn:last-child {
   color: #000;
@@ -188,7 +185,7 @@ input.log-btn:last-child {
     margin: 3rem;
   }
 }
-.pageContainer{
+.pageContainer {
   margin-bottom: 10rem;
 }
 .input,
@@ -201,10 +198,9 @@ input.log-btn:last-child {
   height: 3rem;
   width: 100%;
   outline: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding: 0 3rem;
   font-size: 1rem;
-  
 }
 @media (min-width: 1100px) {
   .input,
@@ -218,11 +214,11 @@ input.log-btn:last-child {
   margin-bottom: 2rem;
 }
 #name {
-  background: url('./assets/badgeIcon.svg') #ffffff 2.5% center no-repeat;
+  background: url("./assets/badgeIcon.svg") #ffffff 2.5% center no-repeat;
 }
 
-#email{
-  background: url('./assets/personIcon.svg') #ffffff 2.5% center no-repeat;
+#email {
+  background: url("./assets/personIcon.svg") #ffffff 2.5% center no-repeat;
 }
 
 .passwordInputDiv {
@@ -230,7 +226,7 @@ input.log-btn:last-child {
 }
 
 #password {
-  background: url('./assets/lockIcon.svg') #ffffff 2.5% center no-repeat;
+  background: url("./assets/lockIcon.svg") #ffffff 2.5% center no-repeat;
 }
 
 .showPassword {
@@ -326,14 +322,12 @@ input.log-btn:last-child {
   margin-bottom: 3rem;
 }
 
-
 .profile {
   color: #fff;
   margin-top: 3vh;
   font-size: 1.5em;
   display: flex;
   align-items: center;
-
 }
 
 .profile div {
@@ -346,14 +340,13 @@ input.log-btn:last-child {
   align-items: center;
   margin-bottom: 3vh;
   grid-template-columns: 1fr 1fr;
-  
 }
 
 #actual-btn {
   margin-top: 1vh;
   background-color: #246030;
   border: none;
-  color: #FFF;
+  color: #fff;
   border-radius: 20px;
   font-size: 1em;
   padding: 5px 23px;
@@ -371,12 +364,13 @@ input.log-btn:last-child {
 }
 
 .user-pic-div {
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.belt, .armband{
+.belt,
+.armband {
   height: 10%;
   width: 13%;
   margin-left: 1%;
@@ -389,7 +383,6 @@ align-items: center;
 .rank-div .belt {
   width: 9%;
 }
-
 
 .rank-div .armband {
   width: 5.5%;
@@ -408,12 +401,12 @@ align-items: center;
 /* .days {
   color: #000;
 } */
-.rank-div-double, .rank-div {
+.rank-div-double,
+.rank-div {
   max-width: 95%;
   margin: auto;
   display: grid;
   gap: 3vw;
-
 }
 
 .rank-div {
@@ -421,16 +414,13 @@ align-items: center;
   flex-direction: column;
 }
 
-
-.bjj-info, .mt-info, .legend {
+.bjj-info,
+.mt-info,
+.legend {
   background-color: #818589;
   padding: 1.5% 10px;
-  border-radius:15px;
+  border-radius: 15px;
 }
-
-
-
-
 
 .line {
   margin: auto;
@@ -444,32 +434,32 @@ align-items: center;
 /* 
  */
 
- .react-calendar { 
+.react-calendar {
   margin: auto;
   width: 85% !important;
- background-color: #fff;
- color: #222;
- border-radius: 8px;
- box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
- font-family: Arial, Helvetica, sans-serif;
- line-height: 1.125em;
+  background-color: #fff;
+  color: #222;
+  border-radius: 8px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
 }
 .react-calendar__navigation button {
- color: #000;
- min-width: 44px;
- background: none;
- font-size: 16px;
- margin-top: 8px;
+  color: #000;
+  min-width: 44px;
+  background: none;
+  font-size: 16px;
+  margin-top: 8px;
 }
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
- background-color: #f8f8fa;
+  background-color: #f8f8fa;
 }
 .react-calendar__navigation button[disabled] {
- background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 abbr[title] {
- text-decoration: none;
+  text-decoration: none;
 }
 /* .react-calendar__month-view__days__day--weekend {
  color: #d10000;
@@ -478,7 +468,7 @@ abbr[title] {
 .react-calendar__navigation {
   margin-bottom: 0;
 }
-.react-calendar__tile--active{
+.react-calendar__tile--active {
   background-color: #246030 !important;
 }
 
@@ -487,37 +477,37 @@ abbr[title] {
 }
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
- background: #f8f8fa;
- color: #000;
- border-radius: 6px;
+  background: #f8f8fa;
+  color: #000;
+  border-radius: 6px;
 }
 .react-calendar__tile--now {
- background: #000;
- border-radius: 6px;
- font-weight: bold;
- color: #000;
+  background: #000;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #000;
 }
 
 .react-calendar__month-view__days__day--weekend {
   color: #000 !important;
 }
 
-
 .react-calendar button {
-    padding-left: 2.5px;
- 
+  padding-left: 2.5px;
 }
 
 .react-calendar__tile--now {
   background-color: #fff !important;
 }
 
-.bjj, .bjj-mt, .mt {
-    background-image: url(./assets/red.svg) !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: contain !important;
-  }
+.bjj,
+.bjj-mt,
+.mt {
+  background-image: url(./assets/red.svg) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+}
 
 .mt {
   background-image: url("./assets/yellow.svg") !important;
@@ -527,8 +517,7 @@ abbr[title] {
   background-image: url("./assets/both.svg") !important;
 }
 
-
-.band-color{
+.band-color {
   fill: #fff;
 }
 
@@ -539,9 +528,8 @@ abbr[title] {
   margin: 3vh;
   border: none;
   border-radius: 20px;
-  display: none;  
+  display: none;
   font-size: 1.3em;
-
 }
 .desk {
   display: block;
@@ -560,7 +548,6 @@ abbr[title] {
   background-color: var(--grey);
 }
 
-
 .legend {
   padding: 2vh 4vw;
   display: flex;
@@ -577,11 +564,9 @@ abbr[title] {
   align-items: center;
   flex-direction: column;
   margin-top: 5vh;
-
 }
 
-@media screen and (max-width: 768px){
-
+@media screen and (max-width: 768px) {
   .calendar-div {
     margin-top: 0;
     flex-direction: row;
@@ -602,7 +587,7 @@ abbr[title] {
   }
 
   .profile div {
-    flex: 0  1 auto;
+    flex: 0 1 auto;
   }
 
   .profile {
@@ -618,40 +603,33 @@ abbr[title] {
   }
 
   .rank-div-double {
-
     grid-template-columns: 1fr 1fr;
-
-  
   }
 
+  .sign-out-btn {
+    display: block;
+  }
 
-
-.sign-out-btn {
-
-  display: block;
-
-}
-
-.desk {
-  display: none;
-}
+  .desk {
+    display: none;
+  }
   .profile {
     color: #fff;
     font-size: 1.1em;
-  
   }
   .user-pic {
     height: 18vh;
     border-radius: 50%;
     width: 26vw;
   }
-  
-  .belt, .armband{
+
+  .belt,
+  .armband {
     height: 10%;
     width: 17%;
     margin-left: 1%;
   }
-  
+
   .armband {
     width: 10%;
   }
@@ -662,42 +640,37 @@ abbr[title] {
   .rank-div .belt {
     width: 12%;
   }
-  
-  
+
   .rank-div .armband {
     width: 5%;
   }
-  .react-calendar { 
+  .react-calendar {
     margin: 3vh 0 0 5vw !important;
   }
-  
 }
-@media screen and (max-width: 425px){
-
+@media screen and (max-width: 425px) {
   .user-pic {
     height: 17vh;
     border-radius: 50%;
     width: 35vw;
   }
-  
 
-  
-    .sign-in {
-      font-size: 1.8em;
-    }
+  .sign-in {
+    font-size: 1.8em;
+  }
 
   .profile {
     color: #fff;
     font-size: 1em;
-  
   }
 
-  .belt, .armband{
+  .belt,
+  .armband {
     height: 10%;
     width: 25%;
     margin-left: 1%;
   }
-  
+
   .armband {
     width: 17%;
   }
@@ -705,11 +678,9 @@ abbr[title] {
     width: 19%;
   }
 
-  
   .rank-div .armband {
     width: 12%;
   }
-  
 }
 
 /* Members table */
@@ -718,7 +689,8 @@ abbr[title] {
   font-size: 2em;
 }
 
-.table-heading p, .table-heading a {
+.table-heading p,
+.table-heading a {
   font-size: 2em;
   cursor: pointer;
 }
@@ -736,12 +708,16 @@ abbr[title] {
 
 .table-heading {
   display: flex;
-  margin-top: 5vh;
+  margin-top: 3vh;
+  color: #40d876;
   gap: 2rem;
   justify-content: center;
   align-items: center;
 }
 
+.mt-table .table-heading {
+  margin-top: 5vh;
+}
 
 .container {
   max-width: 85%;
@@ -754,13 +730,13 @@ abbr[title] {
 
 .table {
   width: 100%;
-  border: 1px solid #EEEEEE;
+  border: 1px solid #eeeeee;
 }
 
 .table-header {
   display: flex;
   width: 100%;
-  background:  var(--gray);
+  background: var(--gray);
   padding: 18px 0;
 }
 
@@ -770,7 +746,7 @@ abbr[title] {
   padding: 18px 0;
 }
 .table-row:nth-of-type(odd) {
-  background: #EEEEEE;
+  background: #eeeeee;
   color: var(--gray);
 }
 
@@ -778,11 +754,12 @@ abbr[title] {
   color: #fff;
 }
 
-.table-row:nth-of-type(even) .edit-icon *{
+.table-row:nth-of-type(even) .edit-icon * {
   fill: #fff;
 }
 
-.table-data, .header__item {
+.table-data,
+.header__item {
   flex: 1 1 20%;
   text-align: center;
   display: flex;
@@ -802,13 +779,11 @@ abbr[title] {
 
 /*  */
 
-
 .verify-btns input {
   margin-top: 3vh;
   border-radius: 30px;
   width: 200px;
   height: 55px;
-
 }
 
 .verify-btns input:first-child {
@@ -818,23 +793,19 @@ abbr[title] {
 }
 
 .verify-btns input:last-child {
-  background:none;
+  background: none;
   background-color: #cc0000;
   color: #fff;
 }
 
 .attend .overlay {
   font-size: 22px;
-
 }
 
 .attend .popup {
   margin: 29% auto;
   width: 63%;
- 
 }
-
-
 
 .overlay {
   position: fixed;
@@ -844,7 +815,6 @@ abbr[title] {
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
   opacity: 1;
-  
 }
 
 .hidden {
@@ -852,7 +822,7 @@ abbr[title] {
 }
 
 .visible {
-  visibility:visible;
+  visibility: visible;
 }
 
 .popup {
@@ -886,7 +856,7 @@ abbr[title] {
   color: red;
 }
 
-.edit-form .formInput{
+.edit-form .formInput {
   margin-top: 1vh;
   background-color: #fff;
 }
@@ -903,4 +873,31 @@ abbr[title] {
 
 .navbar {
   background-color: #1b1b2a;
+  height: 6vh;
+}
+.links-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 40%;
+  height: 100%;
+}
+.green {
+  width: 13px;
+  height: 13px;
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .links-div {
+    width: 100%;
+  }
+
+  .greens-div {
+    display: none;
+  }
+
+  .navbar {
+    display: none;
+  }
 }
