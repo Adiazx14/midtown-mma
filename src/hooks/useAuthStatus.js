@@ -3,7 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const useAuthStatus = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loadingAdmin, setLoadingAdmin] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [uid, setUid] = useState("");
   const isMounted = useRef(true);
@@ -25,7 +25,7 @@ const useAuthStatus = () => {
           }
           setIsLoggedIn(true);
         }
-        setLoading(false);
+        setLoadingAdmin(false);
       });
     }
 
@@ -34,7 +34,7 @@ const useAuthStatus = () => {
     };
   }, [isMounted]);
 
-  return { isLoggedIn, loading, isAdmin, uid };
+  return { isLoggedIn, loadingAdmin, isAdmin, uid };
 };
 
 export default useAuthStatus;

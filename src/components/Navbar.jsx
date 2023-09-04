@@ -6,10 +6,6 @@ import { ReactComponent as Green } from "../assets/green.svg";
 const Navbar = () => {
   const { isAdmin, uid } = useAuthStatus();
 
-  useEffect(() => {
-    console.log(isAdmin);
-  }, [isAdmin]);
-
   return (
     <div className={`navbar${isAdmin ? "" : " hidden"}`}>
       <div className="links-div">
