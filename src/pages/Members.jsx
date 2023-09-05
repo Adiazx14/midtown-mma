@@ -208,6 +208,12 @@ const Members = () => {
     setFieldEdit("csv");
   };
 
+  const [showInactive, setShowInactive] = useState(true);
+
+  const toggleActiveUsers = () => {
+    setShowInactive((old) => !old);
+  };
+
   return (
     <>
       <Navbar />
@@ -229,6 +235,14 @@ const Members = () => {
                 className="generate-btn"
               >
                 Generate Excel Table
+              </p>
+              <p
+                onClick={() => {
+                  toggleActiveUsers();
+                }}
+                className="generate-btn toggler"
+              >
+                Hide Inactive
               </p>
               {bjjAttendace.length > 0 && (
                 <CSVLink

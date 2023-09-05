@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="87.409" height="87.408" viewBox="0 0 87.409 87.408">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #cb011c;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #f2e72f;
+      }
+
+      .cls-4 {
+        filter: url(#Subtraction_4-2);
+      }
+
+      .cls-5 {
+        filter: url(#Subtraction_4);
+      }
+
+      .cls-6 {
+        filter: url(#Subtraction_2-2);
+      }
+
+      .cls-7 {
+        filter: url(#Subtraction_2);
+      }
+    </style>
+    <filter id="Subtraction_2" x="0" y="0" width="60.205" height="87.408" filterUnits="userSpaceOnUse">
+      <feOffset dx="2" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Subtraction_2-2" x="0" y="0" width="60.205" height="87.408" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-2"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Subtraction_4" x="27.205" y="0" width="60.205" height="87.408" filterUnits="userSpaceOnUse">
+      <feOffset dx="2" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Subtraction_4-2" x="27.205" y="0" width="60.205" height="87.408" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur-4"/>
+      <feFlood flood-opacity="0.161" result="color-2"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-4"/>
+      <feComposite operator="in" in="color-2"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_69" data-name="Group 69" transform="translate(14.5 13.5)">
+    <g data-type="innerShadowGroup">
+      <g class="cls-7" transform="matrix(1, 0, 0, 1, -14.5, -13.5)">
+        <path id="Subtraction_2-3" data-name="Subtraction 2" class="cls-1" d="M27.2,54.408H27.2A27.2,27.2,0,0,1,7.967,7.968,27.117,27.117,0,0,1,27.2,0Z" transform="translate(14.5 13.5)"/>
+      </g>
+      <g class="cls-6" transform="matrix(1, 0, 0, 1, -14.5, -13.5)">
+        <path id="Subtraction_2-4" data-name="Subtraction 2" class="cls-2" d="M27.2,54.408H27.2A27.2,27.2,0,0,1,7.967,7.968,27.117,27.117,0,0,1,27.2,0Z" transform="translate(14.5 13.5)"/>
+      </g>
+    </g>
+    <g data-type="innerShadowGroup">
+      <g class="cls-5" transform="matrix(1, 0, 0, 1, -14.5, -13.5)">
+        <path id="Subtraction_4-3" data-name="Subtraction 4" class="cls-3" d="M27.2,54.408H27.2A27.2,27.2,0,0,1,7.967,7.968,27.117,27.117,0,0,1,27.2,0Z" transform="translate(68.91 67.91) rotate(180)"/>
+      </g>
+      <g class="cls-4" transform="matrix(1, 0, 0, 1, -14.5, -13.5)">
+        <path id="Subtraction_4-4" data-name="Subtraction 4" class="cls-2" d="M27.2,54.408H27.2A27.2,27.2,0,0,1,7.967,7.968,27.117,27.117,0,0,1,27.2,0Z" transform="translate(68.91 67.91) rotate(180)"/>
+      </g>
+    </g>
+  </g>
+</svg>

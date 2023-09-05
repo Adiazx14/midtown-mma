@@ -2,9 +2,6 @@ import Graph from "../components/Graph";
 import { ReactComponent as Belt } from "../assets/belt.svg";
 import { ReactComponent as Armband } from "../assets/armband.svg";
 import { ReactComponent as UserIcon } from "../assets/userIcon.svg";
-import { ReactComponent as Red } from "../assets/red.svg";
-import { ReactComponent as Yellow } from "../assets/yellow.svg";
-import { ReactComponent as Both } from "../assets/both.svg";
 import { ReactComponent as Logout } from "../assets/logout.svg";
 import { ReactComponent as Camera } from "../assets/camera.svg";
 import { ReactComponent as Trash } from "../assets/trash.svg";
@@ -17,6 +14,10 @@ import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import useAuthStatus from "../hooks/useAuthStatus";
+import { ReactComponent as Bjj } from "../assets/bjj.svg";
+import { ReactComponent as Mt } from "../assets/mt.svg";
+import { ReactComponent as Mma } from "../assets/mma.svg";
+import { ReactComponent as Private } from "../assets/private.svg";
 
 const Membership = ({ user, profileUserId, email }) => {
   const auth = getAuth();
@@ -176,8 +177,26 @@ const Membership = ({ user, profileUserId, email }) => {
           id={user.id}
           bjjClasses={user.bjjClasses}
           mtClasses={user.mtClasses}
+          mmaClasses={user.mmaClasses ? user.mmaClasses : []}
         />
-        <div className="legend"></div>
+        <div className="legend">
+          <div className="legend-item">
+            <Bjj />
+            <span>Jiu-jitsu</span>
+          </div>
+          <div className="legend-item">
+            <Mt />
+            <span>Muay Thai</span>
+          </div>
+          <div className="legend-item">
+            <Mma />
+            <span>MMA</span>
+          </div>
+          <div className="legend-item">
+            <Private />
+            <span>Private</span>
+          </div>
+        </div>
       </div>
     </div>
   );
