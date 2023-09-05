@@ -25,19 +25,19 @@ const Membership = ({ user, profileUserId, email }) => {
   const { isAdmin } = useAuthStatus();
   const getBeltColor = (rank) => {
     if (rank.includes("Blue")) {
-      return "#00c";
+      return "blue-belt";
     }
     if (rank.includes("Purple")) {
-      return "purple";
+      return "purple-belt";
     }
     if (rank.includes("Brown")) {
-      return "#964B00";
+      return "brown-belt";
     }
     if (rank.includes("Black")) {
-      return "#222";
+      return "black-belt";
     }
 
-    return "#fff";
+    return "white-belt";
   };
 
   const signOut = () => {
@@ -147,26 +147,32 @@ const Membership = ({ user, profileUserId, email }) => {
           </div>
         </div>
         <div
-          className={user.membership === "2" ? "rank-div-double" : "rank-div"}
+          className="rank-div-double"
         >
           {user.membership !== "1" && (
             <div className="bjj-info rank-div">
-              <Belt className="belt" fill={getBeltColor(user.bjjRank)} />
-              <p>Rank: {user.bjjRank}</p>
-              <p>Last promotion: {user.bjjPromoted}</p>
+              <div className="acronym">J</div>
+              <Belt className={`belt ${getBeltColor(user.bjjRank)}`} />
+              <p>Rank </p>
+              <p>{user.bjjRank}</p>
+              <p>Last promotion </p>
+              <p>{user.bjjPromoted}</p>
             </div>
           )}
           {user.membership !== "0" && (
             <div className="mt-info rank-div">
+                            <div className="acronym">M</div>
+
               <Armband className="armband" />
-              <p>Rank: {user.mtRank}</p>
-              <p>Last promotion: {user.mtPromoted}</p>
+              <p>Rank </p>
+              <p>{user.mtRank}</p>
+              <p>Last promotion </p>
+              <p>{user.mtPromoted}</p>
             </div>
           )}
         </div>
       </div>
 
-      <span className="line"></span>
       <div className="calendar-div">
         <Graph
           id={user.id}
@@ -188,9 +194,6 @@ const Membership = ({ user, profileUserId, email }) => {
           </div>
         </div>
       </div>
-      <button className="sign-out-btn" onClick={signOut}>
-        Log Out
-      </button>
     </div>
   );
 };

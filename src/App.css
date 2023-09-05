@@ -345,7 +345,6 @@ input.log-btn:last-child {
   margin-top: 3vh;
   font-size: 1.5em;
   display: flex;
-  align-items: center;
 }
 
 .profile div {
@@ -358,6 +357,7 @@ input.log-btn:last-child {
   align-items: center;
   margin-bottom: 3vh;
   grid-template-columns: 1fr 1fr;
+  margin-top: 2svh;
 }
 
 .user-button {
@@ -371,7 +371,7 @@ input.log-btn:last-child {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 45%;
+  width: 48%;
   height: 4vh;
 }
 
@@ -390,6 +390,8 @@ input.log-btn:last-child {
   color: #fff;
 }
 
+
+
 .trash {
   width: 40px;
   height: 35px;
@@ -402,9 +404,9 @@ input.log-btn:last-child {
 }
 
 .user-pic {
-  height: 28vh;
+  height: 14vw;
   border-radius: 50%;
-  width: 12vw;
+  width: 14vw;
 }
 
 .user-pic-div {
@@ -413,23 +415,14 @@ input.log-btn:last-child {
   align-items: center;
 }
 
-.p-header {
-  color: #000;
-  font-size: 1.7em;
-  display: flex;
-  justify-content: center;
-  gap: 2vw;
-  align-items: center;
-  margin-bottom: 0.5vh;
-}
 
 /* .days {
   color: #000;
 } */
-.rank-div-double,
-.rank-div {
+.rank-div-double {
   max-width: 80%;
   margin: auto;
+  margin-top: 8vh;
   display: flex;
   justify-content: space-around;
   gap: 2vw;
@@ -445,6 +438,55 @@ input.log-btn:last-child {
   height: 35vh;
   width: 45%;
   flex: initial !important;
+  position: relative;
+}
+
+.rank-div p:nth-child(odd) {
+  margin-top: 3vh;
+  font-weight: bolder;
+  color: #fff;
+}
+.rank-div p:nth-child(even) {
+  margin-top: 1vh;
+  color: #707070;
+}
+
+
+.acronym {
+  position: absolute;
+  right: 6%;
+  top: 5%;
+  width: 2.5vw;
+  height: 2.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #373850;
+  border-radius: 50%;
+  color: #40d876;
+}
+
+.belt {
+  margin-top: 12%;
+}
+
+.blue-belt path {
+  fill: #00c;
+}
+.purple-belt path {
+  fill: purple;
+}
+.brown-belt path {
+  fill: #964B00;
+}
+.black-belt path {
+  fill: #000;
+}
+
+
+.armband {
+  margin-top: 5%;
+  height: 25%;
 }
 
 .line {
@@ -462,15 +504,51 @@ input.log-btn:last-child {
 .react-calendar {
   margin: auto;
   width: 85% !important;
-  background-color: #fff;
-  color: #222;
+  background-color: #1b1b2a !important;
   border-radius: 8px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
+  box-sizing: border-box;
+  border: none !important;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 0.2);
+}
+.react-calendar__tile {
+  color: #fff !important;
+
+}
+
+.react-calendar__navigation__label__labelText {
+  color: #40d876 !important;
+  font-size: 1.3em !important;
+
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  color: #000;
+}
+
+.react-calendar__viewContainer, .react-calendar__navigation {
+  margin: auto;
+  width: 80%;
+  padding-top: 3vh;
+}
+
+.react-calendar__viewContainer {
+  padding-bottom: 3vh;
+}
+
+.react-calendar__tile--now {
+  background-color: #40d876 !important;
+}
+
+.react-calendar__month-view__weekdays {
+  background-color: #D8D8EA;
+  border-radius: 15px;
+  margin-bottom: 2vh;
 }
 .react-calendar__navigation button {
-  color: #000;
+  color: #40d876 !important;
   min-width: 44px;
   background: none;
   font-size: 16px;
@@ -491,10 +569,10 @@ abbr[title] {
 } */
 
 .react-calendar__navigation {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 .react-calendar__tile--active {
-  background-color: #246030 !important;
+  background-color: #40d876 !important;
 }
 
 .react-calendar__month-view__days__day--neighboringMonth {
@@ -513,17 +591,11 @@ abbr[title] {
   color: #000;
 }
 
-.react-calendar__month-view__days__day--weekend {
-  color: #000 !important;
-}
 
 .react-calendar button {
   padding-left: 2.5px;
 }
 
-.react-calendar__tile--now {
-  background-color: #fff !important;
-}
 
 .bjj,
 .bjj-mt,
@@ -588,23 +660,30 @@ abbr[title] {
   display: grid;
   align-items: center;
   flex-direction: column;
-  margin-top: 5vh;
+  padding-top: 5vh;
 }
 
 @media screen and (max-width: 768px) {
+  
+  #delete-button {
+    display: none ;
+  }
+  .rank-div {
+    height: 28vh;
+    margin-top: 0;
+  }
+  .rank-div-double {
+    margin-top: 5vh;
+    max-width: 95%;
+  }
   .calendar-div {
     margin-top: 0;
     flex-direction: row;
     display: flex;
   }
 
-  .legend {
-    flex-direction: column;
-    padding: 3%;
-    flex: 1 1 0;
-    margin-right: 5vw;
-    margin-top: auto;
-    width: 16%;
+  .acronym {
+    display: none;
   }
 
   .logo {
@@ -635,9 +714,9 @@ abbr[title] {
     font-size: 1.1em;
   }
   .user-pic {
-    height: 18vh;
+    height: 8vw;
     border-radius: 50%;
-    width: 26vw;
+    width: 8vw;
   }
   .react-calendar {
     margin: 3vh 0 0 5vw !important;
@@ -645,10 +724,11 @@ abbr[title] {
 }
 @media screen and (max-width: 425px) {
   .user-pic {
-    height: 17vh;
+    height: 30vw;
     border-radius: 50%;
-    width: 35vw;
+    width: 30vw;
   }
+
 
   .sign-in {
     font-size: 1.8em;
