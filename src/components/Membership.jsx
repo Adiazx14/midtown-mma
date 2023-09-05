@@ -146,9 +146,7 @@ const Membership = ({ user, profileUserId, email }) => {
             )}
           </div>
         </div>
-        <div
-          className="rank-div-double"
-        >
+        <div className="rank-div-double">
           {user.membership !== "1" && (
             <div className="bjj-info rank-div">
               <div className="acronym">J</div>
@@ -161,7 +159,7 @@ const Membership = ({ user, profileUserId, email }) => {
           )}
           {user.membership !== "0" && (
             <div className="mt-info rank-div">
-                            <div className="acronym">M</div>
+              <div className="acronym">M</div>
 
               <Armband className="armband" />
               <p>Rank </p>
@@ -179,20 +177,7 @@ const Membership = ({ user, profileUserId, email }) => {
           bjjClasses={user.bjjClasses}
           mtClasses={user.mtClasses}
         />
-        <div className="legend">
-          <div className="legend-icon-div">
-            <Red />
-            <p>Jiu-Jitsu</p>
-          </div>
-          <div className="legend-icon-div">
-            <Yellow />
-            <p>Muay Thai</p>
-          </div>
-          <div className="legend-icon-div">
-            <Both />
-            <p>Both</p>
-          </div>
-        </div>
+        <div className="legend"></div>
       </div>
     </div>
   );

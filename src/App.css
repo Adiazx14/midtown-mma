@@ -357,7 +357,7 @@ input.log-btn:last-child {
   align-items: center;
   margin-bottom: 3vh;
   grid-template-columns: 1fr 1fr;
-  margin-top: 5vh;
+  margin-top: 7vh;
 }
 
 .user-button {
@@ -402,9 +402,9 @@ input.log-btn:last-child {
 }
 
 .user-pic {
-  height: 14vw;
+  height: 12vw;
   border-radius: 50%;
-  width: 14vw;
+  width: 12vw;
 }
 
 .user-pic-div {
@@ -667,12 +667,15 @@ abbr[title] {
     margin-top: 5vh;
     max-width: 95%;
   }
-  .calendar-div {
-    margin-top: 0;
-    flex-direction: row;
-    display: flex;
+
+  .react-calendar__navigation__label__labelText {
+    color: #40d876 !important;
+    font-size: 1.1em !important;
   }
 
+  .react-calendar__month-view__weekdays {
+    margin: 2vh 0;
+  }
   .acronym {
     display: none;
   }
@@ -709,8 +712,9 @@ abbr[title] {
     border-radius: 50%;
     width: 8vw;
   }
-  .react-calendar {
-    margin: 3vh 0 0 5vw !important;
+
+  .user-div {
+    margin-top: 2vh;
   }
 }
 @media screen and (max-width: 425px) {
