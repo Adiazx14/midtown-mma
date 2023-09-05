@@ -226,11 +226,16 @@ const Members = () => {
                 onClick={() => {
                   chooseMonth();
                 }}
+                className="generate-btn"
               >
                 Generate Excel Table
               </p>
               {bjjAttendace.length > 0 && (
-                <CSVLink filename="BJJ Attendance" data={bjjAttendace}>
+                <CSVLink
+                  className="generate-btn"
+                  filename="BJJ Attendance"
+                  data={bjjAttendace}
+                >
                   Download Table
                 </CSVLink>
               )}
@@ -325,11 +330,16 @@ const Members = () => {
                 onClick={() => {
                   chooseMonth();
                 }}
+                className="generate-btn"
               >
                 Generate Excel Table
               </p>
               {mtAttendace.length > 0 && (
-                <CSVLink filename="Muay Thai Attendance" data={mtAttendace}>
+                <CSVLink
+                  className="generate-btn"
+                  filename="Muay Thai Attendance"
+                  data={mtAttendace}
+                >
                   Download Table
                 </CSVLink>
               )}
