@@ -357,7 +357,7 @@ input.log-btn:last-child {
   align-items: center;
   margin-bottom: 3vh;
   grid-template-columns: 1fr 1fr;
-  margin-top: 2svh;
+  margin-top: 5vh;
 }
 
 .user-button {
@@ -390,8 +390,6 @@ input.log-btn:last-child {
   color: #fff;
 }
 
-
-
 .trash {
   width: 40px;
   height: 35px;
@@ -414,7 +412,6 @@ input.log-btn:last-child {
   flex-direction: column;
   align-items: center;
 }
-
 
 /* .days {
   color: #000;
@@ -451,7 +448,6 @@ input.log-btn:last-child {
   color: #707070;
 }
 
-
 .acronym {
   position: absolute;
   right: 6%;
@@ -477,12 +473,11 @@ input.log-btn:last-child {
   fill: purple;
 }
 .brown-belt path {
-  fill: #964B00;
+  fill: #964b00;
 }
 .black-belt path {
   fill: #000;
 }
-
 
 .armband {
   margin-top: 5%;
@@ -515,20 +510,19 @@ input.log-btn:last-child {
 }
 .react-calendar__tile {
   color: #fff !important;
-
 }
 
 .react-calendar__navigation__label__labelText {
   color: #40d876 !important;
   font-size: 1.3em !important;
-
 }
 
 .react-calendar__month-view__weekdays__weekday {
   color: #000;
 }
 
-.react-calendar__viewContainer, .react-calendar__navigation {
+.react-calendar__viewContainer,
+.react-calendar__navigation {
   margin: auto;
   width: 80%;
   padding-top: 3vh;
@@ -543,7 +537,7 @@ input.log-btn:last-child {
 }
 
 .react-calendar__month-view__weekdays {
-  background-color: #D8D8EA;
+  background-color: #d8d8ea;
   border-radius: 15px;
   margin-bottom: 2vh;
 }
@@ -591,11 +585,9 @@ abbr[title] {
   color: #000;
 }
 
-
 .react-calendar button {
   padding-left: 2.5px;
 }
-
 
 .bjj,
 .bjj-mt,
@@ -664,9 +656,8 @@ abbr[title] {
 }
 
 @media screen and (max-width: 768px) {
-  
   #delete-button {
-    display: none ;
+    display: none;
   }
   .rank-div {
     height: 28vh;
@@ -728,7 +719,6 @@ abbr[title] {
     border-radius: 50%;
     width: 30vw;
   }
-
 
   .sign-in {
     font-size: 1.8em;
