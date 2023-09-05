@@ -151,6 +151,24 @@ input.log-btn:last-child {
   font-size: inherit;
 }
 
+.username-span {
+  font-weight: bolder;
+}
+
+.id-span {
+  color: #40d876;
+  margin-left: 3vw;
+  font-weight: bolder;
+}
+
+.user-email {
+  font-weight: bold;
+}
+
+.user-joinDate {
+  color: #707070;
+}
+
 .user-text p {
   margin-bottom: 0.1rem;
 }
@@ -342,15 +360,41 @@ input.log-btn:last-child {
   grid-template-columns: 1fr 1fr;
 }
 
-#actual-btn {
+.user-button {
   margin-top: 1vh;
-  background-color: #246030;
+  background-color: #40d876;
   border: none;
-  color: #fff;
-  border-radius: 20px;
-  font-size: 1em;
-  padding: 5px 23px;
+  border-radius: 10px;
+  font-size: 0.9em;
+  padding: 0 20px;
+  padding-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 45%;
+  height: 4vh;
 }
+
+.user-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-button path,
+.user-button ellipse {
+  fill: #000;
+}
+
+#delete-button {
+  background-color: #cb011c;
+  color: #fff;
+}
+
+.trash {
+  width: 40px;
+  height: 35px;
+}
+
 .user-text {
   flex-direction: column;
   display: flex;
@@ -358,34 +402,15 @@ input.log-btn:last-child {
 }
 
 .user-pic {
-  height: 24vh;
+  height: 28vh;
   border-radius: 50%;
-  width: 14vw;
+  width: 12vw;
 }
 
 .user-pic-div {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.belt,
-.armband {
-  height: 10%;
-  width: 13%;
-  margin-left: 1%;
-}
-
-.armband {
-  width: 8%;
-}
-
-.rank-div .belt {
-  width: 9%;
-}
-
-.rank-div .armband {
-  width: 5.5%;
 }
 
 .p-header {
@@ -403,23 +428,23 @@ input.log-btn:last-child {
 } */
 .rank-div-double,
 .rank-div {
-  max-width: 95%;
+  max-width: 80%;
   margin: auto;
-  display: grid;
-  gap: 3vw;
+  display: flex;
+  justify-content: space-around;
+  gap: 2vw;
 }
 
 .rank-div {
   display: flex;
   flex-direction: column;
-}
-
-.bjj-info,
-.mt-info,
-.legend {
-  background-color: #818589;
+  align-items: center;
+  background-color: #1b1b2a;
   padding: 1.5% 10px;
   border-radius: 15px;
+  height: 35vh;
+  width: 45%;
+  flex: initial !important;
 }
 
 .line {
@@ -586,10 +611,6 @@ abbr[title] {
     height: 15vh;
   }
 
-  .profile div {
-    flex: 0 1 auto;
-  }
-
   .profile {
     flex-direction: column;
   }
@@ -600,10 +621,6 @@ abbr[title] {
     width: 75%;
     height: 0.3vh;
     margin-top: 3vh;
-  }
-
-  .rank-div-double {
-    grid-template-columns: 1fr 1fr;
   }
 
   .sign-out-btn {
@@ -621,28 +638,6 @@ abbr[title] {
     height: 18vh;
     border-radius: 50%;
     width: 26vw;
-  }
-
-  .belt,
-  .armband {
-    height: 10%;
-    width: 17%;
-    margin-left: 1%;
-  }
-
-  .armband {
-    width: 10%;
-  }
-  .p-header {
-    font-size: 1.3em;
-  }
-
-  .rank-div .belt {
-    width: 12%;
-  }
-
-  .rank-div .armband {
-    width: 5%;
   }
   .react-calendar {
     margin: 3vh 0 0 5vw !important;
@@ -662,24 +657,6 @@ abbr[title] {
   .profile {
     color: #fff;
     font-size: 1em;
-  }
-
-  .belt,
-  .armband {
-    height: 10%;
-    width: 25%;
-    margin-left: 1%;
-  }
-
-  .armband {
-    width: 17%;
-  }
-  .rank-div .belt {
-    width: 19%;
-  }
-
-  .rank-div .armband {
-    width: 12%;
   }
 }
 
@@ -886,6 +863,10 @@ abbr[title] {
   width: 13px;
   height: 13px;
   margin-left: 5px;
+}
+
+.green ellipse {
+  fill: #40d876;
 }
 
 @media screen and (max-width: 768px) {

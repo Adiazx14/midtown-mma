@@ -56,6 +56,7 @@ const Profile = () => {
             profileUserId={profileUserId}
             id={membership.id}
             user={membership}
+            email={user.email}
           />
         ))
       ) : (
