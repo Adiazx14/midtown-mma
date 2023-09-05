@@ -1,167 +1,205 @@
-import Graph from "../components/Graph"
-import {ReactComponent as Belt} from "../assets/belt.svg"
-import {ReactComponent as Armband} from "../assets/armband.svg"
-import {ReactComponent as UserIcon} from "../assets/userIcon.svg"
-import {ReactComponent as Red} from "../assets/red.svg"
-import {ReactComponent as Yellow} from "../assets/yellow.svg"
-import {ReactComponent as Both} from "../assets/both.svg"
-import { getAuth } from "firebase/auth"
-import { Link, useNavigate } from "react-router-dom"
-import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage'
-import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore"
-import { v4 } from "uuid"
-import { db } from "../firebase.config"
-import { toast } from "react-toastify"
-import { useState } from "react"
+import Graph from "../components/Graph";
+import { ReactComponent as Belt } from "../assets/belt.svg";
+import { ReactComponent as Armband } from "../assets/armband.svg";
+import { ReactComponent as UserIcon } from "../assets/userIcon.svg";
+import { ReactComponent as Logout } from "../assets/logout.svg";
+import { ReactComponent as Camera } from "../assets/camera.svg";
+import { ReactComponent as Trash } from "../assets/trash.svg";
+import { getAuth } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { v4 } from "uuid";
+import { db } from "../firebase.config";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import useAuthStatus from "../hooks/useAuthStatus";
+import { ReactComponent as Bjj } from "../assets/bjj.svg";
+import { ReactComponent as Mt } from "../assets/mt.svg";
+import { ReactComponent as Mma } from "../assets/mma.svg";
+import { ReactComponent as Private } from "../assets/private.svg";
 
-
-
-const Membership = ({user, loggedUserId, profileUserId}) => {
-
-    const auth = getAuth()
-    const navigate = useNavigate()
-    const [profilePic, setProfilePic] = useState(user.profilePic)
-    const getBeltColor = (rank) => {
-
-        if (rank.includes("Blue")) {
-            return "#00c"
-        }
-        if (rank.includes("Purple")) {
-            return "purple"
-        }
-        if (rank.includes("Brown")) {
-            return "#964B00"
-        }
-        if (rank.includes("Black")) {
-            return "#222"
-        }
-        
-        return "#fff"
+const Membership = ({ user, profileUserId, email }) => {
+  const auth = getAuth();
+  const navigate = useNavigate();
+  const [profilePic, setProfilePic] = useState(user.profilePic);
+  const { isAdmin } = useAuthStatus();
+  const getBeltColor = (rank) => {
+    if (rank.includes("Blue")) {
+      return "blue-belt";
+    }
+    if (rank.includes("Purple")) {
+      return "purple-belt";
+    }
+    if (rank.includes("Brown")) {
+      return "brown-belt";
+    }
+    if (rank.includes("Black")) {
+      return "black-belt";
     }
 
-    const signOut = () => {
-        auth.signOut()
-        localStorage.setItem("uid", "")
-        navigate("/")
+    return "white-belt";
+  };
+
+  const signOut = () => {
+    auth.signOut();
+    localStorage.setItem("uid", "");
+    navigate("/");
+  };
+
+  const updatePic = async (image) => {
+    try {
+      if (image) {
+        const storage = getStorage();
+        const imageRef = ref(storage, `images/${image.name + v4()}`);
+        const snapShot = await uploadBytes(imageRef, image);
+        const url = await getDownloadURL(snapShot.ref);
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        await updateDoc(userRef, {
+          profilePic: url,
+        });
+        setProfilePic(url);
+
+        toast.success("Uploaded succesfully");
+      } else {
+        toast.error("No image selected");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Error");
+    }
+  };
+
+  const deleteUser = async () => {
+    const userRef = doc(db, "users", profileUserId);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      const ids = userData.ids.filter((id) => id !== user.id);
+      const memberships = userData.memberships;
+      delete memberships[user.id];
+      await updateDoc(userRef, { ids, memberships });
     }
 
-    const updatePic = async(image)=> {
-        try {
-            if (image) {
-                const storage = getStorage()
-                const imageRef = ref(storage, `images/${image.name + v4()}`)
-                const snapShot = await uploadBytes(imageRef, image)
-                const url = await getDownloadURL(snapShot.ref)
-                const userRef = doc(db, "users", auth.currentUser.uid)
-                await updateDoc(userRef, {
-                    profilePic: url
-                })
-                setProfilePic(url)
-                
-                toast.success("Uploaded succesfully")
-            }
-            else {
-                toast.error("No image selected")
-            }
+    toast.success("User deleted");
+    navigate("/members");
+  };
 
-        }
-        catch(err) {
-            console.log(err)
-            toast.error("Error")
-        }
-
-    }
-
-    const deleteUser = async() => {
-        console.log(user)
-        const userRef = doc(db, "users", profileUserId)
-        const userSnap = await getDoc(userRef)
-        if (userSnap.exists()) {
-            const userData = userSnap.data()
-            const ids = userData.ids.filter(id=>id!==user.id)
-            const memberships = userData.memberships
-            delete memberships[user.id]
-            await updateDoc(userRef, {ids, memberships})
-        }
-        
-        toast.success("User deleted")
-        navigate("/members")
-    }
-
-    return (
-        <div className="profile">
-        <div className="user-and-rank">
-            <div className="user-div">
-                <div className="user-pic-div">
-                    {profilePic? <img className="user-pic" src={profilePic} alt="" /> : <UserIcon/>}
-                    <input id="update-pic-btn" className="update-pic-btn" style={{display:"None"}} onChange={(e)=>{updatePic(e.target.files[0])}} type="file" name="update profile" />
-                    <button id="actual-btn" onClick={()=>{document.getElementById("update-pic-btn").click()}}>Update Pic</button>
-                </div>
-
-                <div className="user-text">
-                    <p>{user.name}</p>
-                    <p><a href={"mailto:" +user.email}>{user.email}</a></p>
-                    <p>ID: {user.id}</p>
-                    <p>Joined: {user.joinDate}</p>
-                </div>  
+  return (
+    <div className="profile">
+      <div className="user-and-rank">
+        <div className="user-div">
+          <div className="user-pic-div">
+            {profilePic ? (
+              <img className="user-pic" src={profilePic} alt="" />
+            ) : (
+              <UserIcon />
+            )}
+          </div>
+          <div className="user-icon-text">
+            <div className="user-text">
+              <p>
+                <span className="username-span">{user.name}</span>{" "}
+                <span className="id-span">ID: {user.id}</span>
+              </p>
+              <p>
+                <a className="user-email" href={"mailto:" + email}>
+                  {email}
+                </a>
+              </p>
+              <p className="user-joinDate">Joined: {user.joinDate}</p>
             </div>
-            <div className={user.membership=== "2"?"rank-div-double":"rank-div"}>
-                {user.membership !== "1" &&
-                <div className="bjj-info">
-                    <p className="p-header">
-                    <span>Jiu-Jitsu</span> 
-                    <Belt className="belt" fill={getBeltColor(user.bjjRank)}/>
-                    </p>
-                    <p>Rank: {user.bjjRank}</p> 
-                    <p>Last promotion: {user.bjjPromoted}</p>
-                </div>
-                }
-                {user.membership !== "0" &&
-                <div className="mt-info">
-                    <p className="p-header">
-                        <span>Muay Thai</span>   
-                        <Armband className="armband" />
-                    </p>
-                    <p>Rank: {user.mtRank}</p> 
-                    <p>Last promotion: {user.mtPromoted}</p>
-                </div>
-                }
-                { ((loggedUserId==="WThS4cVfqdZypO04WkgRzsZA9pz2") || (loggedUserId==="gryUf2y7DfdjiSYDS1ABZr1S8T72") || (loggedUserId==="JLZtYYmvT3UP7KTr44n9mIUbJDt2")) &&
-                <div className="links desk">
-                    <Link to={"/sign-up"}> Add a member </Link>
-                    <Link to={"/members"}>Members</Link>
-                    <Link to={"/attend"}>Attendance Pad</Link>
-                    <button  className="sign-out-link desk" onClick={signOut}>Log Out</button>
-                    <button  className="sign-out-link desk" onClick={deleteUser}>Delete this user</button>
-                </div>
-                }
+            <div className="user-buttons">
+              <input
+                id="update-pic-btn"
+                className="update-pic-btn"
+                style={{ display: "None" }}
+                onChange={(e) => {
+                  updatePic(e.target.files[0]);
+                }}
+                type="file"
+                name="update profile"
+              />
+              <button
+                className="user-button"
+                id="actual-btn"
+                onClick={() => {
+                  document.getElementById("update-pic-btn").click();
+                }}
+              >
+                <Camera />
+                <span>Update Pic</span>
+              </button>
+              <button className="user-button" id="actual-btn" onClick={signOut}>
+                <Logout />
+                <span>Log Out</span>
+              </button>
             </div>
+            {isAdmin && (
+              <button
+                onClick={deleteUser}
+                id="delete-button"
+                className="user-button"
+              >
+                <Trash className="trash" />
+                <span>Delete user</span>
+              </button>
+            )}
+          </div>
         </div>
-       
-        <span className="line">
-            
-        </span>
-        <div className="calendar-div">
-            <Graph id={user.id} bjjClasses={user.bjjClasses} mtClasses={user.mtClasses}/>   
-            <div className="legend">
-                <div className="legend-icon-div">
-                    <Red/>
-                    <p>Jiu-Jitsu</p>
-                </div>
-                <div className="legend-icon-div">
-                    <Yellow/>
-                    <p>Muay Thai</p>
-                </div>
-                <div className="legend-icon-div">
-                    <Both/>
-                    <p>Both</p>
-                </div>
-            </div>                         
-        </div>
-        <button className="sign-out-btn" onClick={signOut}>Log Out</button>
+        <div className="rank-div-double">
+          {user.membership !== "1" && (
+            <div className="bjj-info rank-div">
+              <div className="acronym">J</div>
+              <Belt className={`belt ${getBeltColor(user.bjjRank)}`} />
+              <p>Rank </p>
+              <p>{user.bjjRank}</p>
+              <p>Last promotion </p>
+              <p>{user.bjjPromoted}</p>
+            </div>
+          )}
+          {user.membership !== "0" && (
+            <div className="mt-info rank-div">
+              <div className="acronym">M</div>
 
+              <Armband className="armband" />
+              <p>Rank </p>
+              <p>{user.mtRank}</p>
+              <p>Last promotion </p>
+              <p>{user.mtPromoted}</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="calendar-div">
+        <Graph
+          id={user.id}
+          bjjClasses={user.bjjClasses}
+          mtClasses={user.mtClasses}
+          mmaClasses={user.mmaClasses ? user.mmaClasses : []}
+        />
+        <div className="legend">
+          <div className="legend-item">
+            <Bjj />
+            <span>Jiu-jitsu</span>
+          </div>
+          <div className="legend-item">
+            <Mt />
+            <span>Muay Thai</span>
+          </div>
+          <div className="legend-item">
+            <Mma />
+            <span>MMA</span>
+          </div>
+          <div className="legend-item">
+            <Private />
+            <span>Private</span>
+          </div>
+        </div>
+      </div>
     </div>
-    )
-}
+  );
+};
 
-export default Membership
+export default Membership;
