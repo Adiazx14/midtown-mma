@@ -68,7 +68,7 @@ const Members = () => {
     setBjjMembers(bjjMembersData);
     setBjjMembersActual(bjjMembersData);
     setMtMembers(mtMembersData);
-    setBjjMembersActual(mtMembersData);
+    setMtMembersActual(mtMembersData);
     /*         setBjjAttendance((prev)=>{ return prev.splice(0,0, lastThirtyDates)})
      */
   };
@@ -108,7 +108,9 @@ const Members = () => {
           mtMembersData.sort((a, b) => (a.name > b.name ? 1 : -1));
         }
         setBjjMembers(bjjMembersData);
+        setBjjMembersActual(bjjMembersData);
         setMtMembers(mtMembersData);
+        setMtMembersActual(mtMembersData);
       }
     );
 
