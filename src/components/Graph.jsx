@@ -14,7 +14,7 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
   const params = useParams();
   const [editing, setEditing] = useState(false);
   const [editedDay, setEditedDay] = useState("");
-  const [addingPrivate, setAddingPrivate] = useState(false)
+  const [addingPrivate, setAddingPrivate] = useState(false);
   const { isAdmin } = useAuthStatus();
 
   const editDay = (day) => {
@@ -30,7 +30,7 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
     const userRef = doc(db, "users", params.id);
     const snapDoc = await getDoc(userRef);
     const user = snapDoc.data();
-    console.log(user)
+    console.log(user);
     let mma = user.memberships[id].mmaClasses;
     if (!mma) {
       mma = [];
@@ -39,7 +39,7 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
     if (!removedPrivates) {
       removedPrivates = {};
     }
-    removedPrivates[editedDay] = ""
+    removedPrivates[editedDay] = "";
     const newMma = [...mma, editedDay];
     const newBjj = [...user.memberships[id].bjjClasses, editedDay];
     const newMt = [...user.memberships[id].mtClasses, editedDay];
@@ -99,19 +99,19 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
         break;
     }
     setEditing(false);
-    setAddingPrivate(false)
+    setAddingPrivate(false);
     window.location.reload();
   };
- 
-  const addPrivate = async(e) => {
+
+  const addPrivate = async (e) => {
     const userRef = doc(db, "users", params.id);
     const snapDoc = await getDoc(userRef);
     const user = snapDoc.data();
-    let classes = user.privateClasses
+    let classes = user.privateClasses;
     if (!classes) {
-      classes = {}
+      classes = {};
     }
-    classes[editedDay] = e.target.value
+    classes[editedDay] = e.target.value;
     const newMemberships = {
       ...user.memberships,
       [id]: { ...user.memberships[id], privateClasses: classes },
@@ -119,11 +119,10 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
     await updateDoc(userRef, {
       memberships: newMemberships,
     });
-    setEditing(false)
-    setAddingPrivate(false)
+    setEditing(false);
+    setAddingPrivate(false);
     window.location.reload();
-
-  }
+  };
 
   return (
     <div className="graph">
@@ -148,14 +147,22 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
           ) {
             return "bjj-mt-mma";
           }
-          if (bjjClasses.includes(timeStamp) && mtClasses.includes(timeStamp) && privateClasses[timeStamp]) {
+          if (
+            bjjClasses.includes(timeStamp) &&
+            mtClasses.includes(timeStamp) &&
+            privateClasses[timeStamp]
+          ) {
             return "bjj-mt-private";
           }
-          if (bjjClasses.includes(timeStamp) && mmaClasses.includes(timeStamp) && privateClasses[timeStamp] ) {
+          if (
+            bjjClasses.includes(timeStamp) &&
+            mmaClasses.includes(timeStamp) &&
+            privateClasses[timeStamp]
+          ) {
             return "bjj-mma-private";
           }
           if (bjjClasses.includes(timeStamp) && mtClasses.includes(timeStamp)) {
-            console.log(privateClasses[timeStamp], privateClasses)
+            console.log(privateClasses[timeStamp], privateClasses);
             return "bjj-mt";
           }
           if (
@@ -180,7 +187,7 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
             return "mma";
           }
           if (privateClasses[timeStamp]) {
-            return "private"
+            return "private";
           }
         }}
       />
@@ -209,12 +216,23 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
             <Mma />
             <span>MMA</span>
           </button>
-          <button onClick={async () => {setAddingPrivate(true)}} className="popup-btn">
+          <button
+            onClick={async () => {
+              setAddingPrivate(true);
+            }}
+            className="popup-btn"
+          >
             <Private />
             <span>Private</span>
           </button>
-          <select onChange={async(e)=> await addPrivate(e)} className={addingPrivate? "active":""} name="instructor" id="">
-            <option value="" selected disabled>Select Instructor</option>
+          <select
+            onChange={async (e) => await addPrivate(e)}
+            className={addingPrivate ? "active" : "inactive"}
+            name="instructor"
+          >
+            <option value="" selected disabled>
+              Select Instructor
+            </option>
             <option value="Professor Martinez">Professor Martinez</option>
             <option value="Professor Farias">Professor Farias</option>
             <option value="Coach Junior">Coach Junior</option>

@@ -705,7 +705,6 @@ abbr[title] {
 .private {
   background-image: url("./assets/private.svg") !important;
   color: #000 !important;
-
 }
 
 .band-color {
@@ -879,6 +878,7 @@ abbr[title] {
 
 .toggler {
   background-color: #1b1b2a;
+  padding: 0 25px;
   color: #fff;
 }
 
@@ -1059,6 +1059,9 @@ select {
   background-color: #40d876;
   border-radius: 10px;
   padding: 5px 10px;
+}
+
+.inactive {
   display: none;
 }
 

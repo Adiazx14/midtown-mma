@@ -25,7 +25,9 @@ const Members = () => {
   const [bjjOrder, setBjjOrder] = useState("alph");
   const [mtOrder, setMtOrder] = useState("alph");
   const [bjjMembers, setBjjMembers] = useState([]);
+  const [bjjMembersActual, setBjjMembersActual] = useState([]);
   const [mtMembers, setMtMembers] = useState([]);
+  const [mtMembersActual, setMtMembersActual] = useState([]);
   const [editing, setEditing] = useState(false);
   const [fieldEdit, setFieldEdit] = useState(0);
   const [editedMember, setEditedMember] = useState({});
@@ -64,7 +66,9 @@ const Members = () => {
     });
 
     setBjjMembers(bjjMembersData);
+    setBjjMembersActual(bjjMembersData);
     setMtMembers(mtMembersData);
+    setBjjMembersActual(mtMembersData);
     /*         setBjjAttendance((prev)=>{ return prev.splice(0,0, lastThirtyDates)})
      */
   };
@@ -173,10 +177,12 @@ const Members = () => {
   const edit = (field, member) => {
     setFieldEdit(field);
     setEditedMember(member);
+    console.log(member);
     setEditing(true);
   };
 
   const onChange = async (e, field) => {
+    console.log(e, field);
     const userRef = doc(db, "users", editedMember.uid);
     const userSnap = await getDoc(userRef);
     if (userSnap.exists()) {
@@ -191,6 +197,7 @@ const Members = () => {
       await updateDoc(userRef, {
         memberships: newMemberships,
       });
+      setEditedMember({});
       setEditing(false);
 
       /*  await fetchMembers()
@@ -211,7 +218,16 @@ const Members = () => {
   const [showInactive, setShowInactive] = useState(true);
 
   const toggleActiveUsers = () => {
-    setShowInactive((old) => !old);
+    if (showInactive) {
+      setShowInactive(false);
+      setBjjMembers(
+        bjjMembersActual.filter((member) => member.status === "Active")
+      );
+      console.log(bjjMembersActual);
+    } else {
+      setShowInactive(true);
+      setBjjMembers(bjjMembersActual);
+    }
   };
 
   return (
@@ -242,7 +258,7 @@ const Members = () => {
                 }}
                 className="generate-btn toggler"
               >
-                Hide Inactive
+                {showInactive ? "Hide" : "Show"} Inactive
               </p>
               {bjjAttendace.length > 0 && (
                 <CSVLink
@@ -435,14 +451,14 @@ const Members = () => {
         )}
         <div className={`overlay ${editing ? "visible" : "hidden"}`}>
           <div className="popup">
-            <span
+            <div
               onClick={() => {
                 setEditing(false);
               }}
               className="close"
             >
               &times;
-            </span>
+            </div>
             {(fieldEdit === "joinDate" ||
               fieldEdit === "bjjPromoted" ||
               fieldEdit === "mtPromoted") && (

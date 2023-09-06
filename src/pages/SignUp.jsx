@@ -85,6 +85,7 @@ function SignUp() {
       formDataCopy.bjjRank = "";
       formDataCopy.bjjClasses = [];
     }
+    formDataCopy.status = "Active";
     return formDataCopy;
   };
 
