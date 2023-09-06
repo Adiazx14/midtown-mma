@@ -30,10 +30,16 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
     const userRef = doc(db, "users", params.id);
     const snapDoc = await getDoc(userRef);
     const user = snapDoc.data();
+    console.log(user)
     let mma = user.memberships[id].mmaClasses;
     if (!mma) {
       mma = [];
     }
+    let removedPrivates = user.memberships[id].privateClasses;
+    if (!removedPrivates) {
+      removedPrivates = {};
+    }
+    removedPrivates[editedDay] = ""
     const newMma = [...mma, editedDay];
     const newBjj = [...user.memberships[id].bjjClasses, editedDay];
     const newMt = [...user.memberships[id].mtClasses, editedDay];
@@ -84,6 +90,7 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
             bjjClasses: removedBjj,
             mtClasses: removedMt,
             mmaClasses: removedMmma,
+            privateClasses: removedPrivates,
           },
         };
         await updateDoc(userRef, {
