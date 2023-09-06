@@ -10,10 +10,11 @@ import { ReactComponent as Mt } from "../assets/mt.svg";
 import { ReactComponent as Mma } from "../assets/mma.svg";
 import { ReactComponent as Private } from "../assets/private.svg";
 
-const Graph = ({ bjjClasses, mtClasses, mmaClasses, id }) => {
+const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
   const params = useParams();
   const [editing, setEditing] = useState(false);
   const [editedDay, setEditedDay] = useState("");
+  const [addingPrivate, setAddingPrivate] = useState(false)
   const { isAdmin } = useAuthStatus();
 
   const editDay = (day) => {
@@ -91,8 +92,31 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, id }) => {
         break;
     }
     setEditing(false);
+    setAddingPrivate(false)
     window.location.reload();
   };
+ 
+  const addPrivate = async(e) => {
+    const userRef = doc(db, "users", params.id);
+    const snapDoc = await getDoc(userRef);
+    const user = snapDoc.data();
+    let classes = user.privateClasses
+    if (!classes) {
+      classes = {}
+    }
+    classes[editedDay] = e.target.value
+    const newMemberships = {
+      ...user.memberships,
+      [id]: { ...user.memberships[id], privateClasses: classes },
+    };
+    await updateDoc(userRef, {
+      memberships: newMemberships,
+    });
+    setEditing(false)
+    setAddingPrivate(false)
+    window.location.reload();
+
+  }
 
   return (
     <div className="graph">
@@ -105,11 +129,26 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, id }) => {
           if (
             bjjClasses.includes(timeStamp) &&
             mtClasses.includes(timeStamp) &&
+            mmaClasses.includes(timeStamp) &&
+            privateClasses[timeStamp]
+          ) {
+            return "bjj-mt-mma-private";
+          }
+          if (
+            bjjClasses.includes(timeStamp) &&
+            mtClasses.includes(timeStamp) &&
             mmaClasses.includes(timeStamp)
           ) {
-            return "bjj-mma-mt";
+            return "bjj-mt-mma";
+          }
+          if (bjjClasses.includes(timeStamp) && mtClasses.includes(timeStamp) && privateClasses[timeStamp]) {
+            return "bjj-mt-private";
+          }
+          if (bjjClasses.includes(timeStamp) && mmaClasses.includes(timeStamp) && privateClasses[timeStamp] ) {
+            return "bjj-mma-private";
           }
           if (bjjClasses.includes(timeStamp) && mtClasses.includes(timeStamp)) {
+            console.log(privateClasses[timeStamp], privateClasses)
             return "bjj-mt";
           }
           if (
@@ -117,6 +156,9 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, id }) => {
             mmaClasses.includes(timeStamp)
           ) {
             return "bjj-mma";
+          }
+          if (bjjClasses.includes(timeStamp) && privateClasses[timeStamp]) {
+            return "bjj-private";
           }
           if (mtClasses.includes(timeStamp) && mmaClasses.includes(timeStamp)) {
             return "mt-mma";
@@ -129,6 +171,9 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, id }) => {
           }
           if (mmaClasses.includes(timeStamp)) {
             return "mma";
+          }
+          if (privateClasses[timeStamp]) {
+            return "private"
           }
         }}
       />
@@ -148,7 +193,7 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, id }) => {
             className="popup-btn"
           >
             <Mt />
-            <span>Muay Thay</span>
+            <span>Muay Thai</span>
           </button>
           <button
             onClick={async () => await modifyClasses("mma")}
@@ -157,10 +202,16 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, id }) => {
             <Mma />
             <span>MMA</span>
           </button>
-          <button onClick={async () => {}} className="popup-btn">
+          <button onClick={async () => {setAddingPrivate(true)}} className="popup-btn">
             <Private />
             <span>Private</span>
           </button>
+          <select onChange={async(e)=> await addPrivate(e)} className={addingPrivate? "active":""} name="instructor" id="">
+            <option value="" selected disabled>Select Instructor</option>
+            <option value="Professor Martinez">Professor Martinez</option>
+            <option value="Professor Farias">Professor Farias</option>
+            <option value="Coach Junior">Coach Junior</option>
+          </select>
           <button
             id="remove-classes"
             onClick={async () => await modifyClasses("remove")}

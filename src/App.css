@@ -106,7 +106,7 @@ img {
   height: 8vh;
 }
 
-form {
+.center form {
   display: flex;
   justify-content: space-evenly;
 }
@@ -632,19 +632,37 @@ abbr[title] {
 .bjj,
 .bjj-mt,
 .bjj-mma,
-.bjj-mma-private .mt,
+.bjj-mt-private,
+.bjj-mt-mma,
+.bjj-mma-private,
+.bjj-mt-mma-private,
+.bjj-private,
+.mt,
 .mt-mma,
 .mt-private,
+.mt-mma-private,
 .mma,
-.mma-private {
+.mma-private,
+.private {
   background-image: url(./assets/bjj.svg) !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: contain !important;
 }
 
+.bjj-mt-mma-private {
+  background-image: url("./assets/all.svg") !important;
+}
 .bjj-mma-private {
   background-image: url("./assets/bjj-mma-private.svg") !important;
+}
+
+.bjj-mt-private {
+  background-image: url("./assets/bjj-mt-private.svg") !important;
+}
+
+.bjj-mt-mma {
+  background-image: url("./assets/bjj-mt-mma.svg") !important;
 }
 
 .bjj-mt {
@@ -656,11 +674,16 @@ abbr[title] {
 }
 
 .bjj-private {
-  background-image: url("./assets/bjj-mma-private.svg") !important;
+  background-image: url("./assets/bjj-private.svg") !important;
 }
 
 .mt {
   background-image: url("./assets/mt.svg") !important;
+  color: #000 !important;
+}
+
+.mt-mma-private {
+  background-image: url("./assets/mt-mma-private.svg") !important;
 }
 
 .mt-mma {
@@ -677,6 +700,12 @@ abbr[title] {
 
 .mma-private {
   background-image: url("./assets/mma-private.svg") !important;
+}
+
+.private {
+  background-image: url("./assets/private.svg") !important;
+  color: #000 !important;
+
 }
 
 .band-color {
@@ -940,13 +969,13 @@ abbr[title] {
 .verify-btns button {
   border: none;
   border-radius: 15px;
-  width: 30%;
   display: flex;
   align-items: center;
   color: #fff;
   justify-content: center;
   gap: 1vw;
-  height: 4vh;
+  height: 5vh;
+  width: 46%;
 }
 
 #yes {
@@ -1022,6 +1051,19 @@ abbr[title] {
   margin-top: 2vh;
   cursor: pointer;
   margin-left: 7vw;
+}
+
+select {
+  margin: 1vh 0;
+  border: none;
+  background-color: #40d876;
+  border-radius: 10px;
+  padding: 5px 10px;
+  display: none;
+}
+
+.active {
+  display: inline;
 }
 
 .popup-btn *:hover {

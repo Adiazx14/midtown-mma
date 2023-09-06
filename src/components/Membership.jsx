@@ -178,6 +178,7 @@ const Membership = ({ user, profileUserId, email }) => {
           bjjClasses={user.bjjClasses}
           mtClasses={user.mtClasses}
           mmaClasses={user.mmaClasses ? user.mmaClasses : []}
+          privateClasses={user.privateClasses ? user.privateClasses : {}}
         />
         <div className="legend">
           <div className="legend-item">
