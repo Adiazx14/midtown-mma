@@ -949,6 +949,15 @@ abbr[title] {
   margin-top: 2vh;
 }
 
+.close {
+  position: absolute;
+    right: 1vw;
+    top: 0.5vw;
+    font-size: 2em;
+    color: #cb011c;
+    cursor: pointer;
+}
+
 .line {
   margin: auto;
   background-color: #fff;

@@ -186,6 +186,7 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
       />
       <div className={`overlay ${editing ? "visible" : "hidden"}`}>
         <div className="popup">
+        <div onClick={()=>{setAddingPrivate(false);setEditing(false)}} className="close">&times;</div>
           <p>Add a class</p>
           <div className="line"></div>
           <button
