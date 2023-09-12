@@ -22,7 +22,6 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
       setEditing(true);
 
       setEditedDay(day.toJSON().slice(0, 10));
-      console.log(mmaClasses);
     }
   };
 
@@ -107,8 +106,9 @@ const Graph = ({ bjjClasses, mtClasses, mmaClasses, privateClasses, id }) => {
     const userRef = doc(db, "users", params.id);
     const snapDoc = await getDoc(userRef);
     const user = snapDoc.data();
-    let classes = user.privateClasses;
+    let classes = user.memberships[id].privateClasses;
     if (!classes) {
+      console.log("Didn't work")
       classes = {};
     }
     classes[editedDay] = e.target.value;
