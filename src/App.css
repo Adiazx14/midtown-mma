@@ -413,6 +413,7 @@ input.log-btn:last-child {
   justify-content: space-evenly;
   width: 48%;
   height: 4vh;
+  font-size: 0.7em;
 }
 
 .user-buttons {
@@ -530,7 +531,7 @@ input.log-btn:last-child {
 .react-calendar {
   margin: auto;
   width: 85% !important;
-  height: 50vh;
+  height: 53vh;
   background-color: #1b1b2a !important;
   border-radius: 8px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
@@ -774,7 +775,7 @@ abbr[title] {
   }
 
   .react-calendar {
-    height: 40vh !important;
+    height: 48vh !important;
   }
 
   .react-calendar__month-view__days {
@@ -814,6 +815,9 @@ abbr[title] {
     height: 20vw;
     border-radius: 50%;
     width: 20vw;
+  }
+  .user-button svg {
+    width: 30%;
   }
   .user-div {
     margin-top: 2vh;
@@ -951,11 +955,11 @@ abbr[title] {
 
 .close {
   position: absolute;
-    right: 1vw;
-    top: 0.5vw;
-    font-size: 2em;
-    color: #cb011c;
-    cursor: pointer;
+  right: 1vw;
+  top: 0.5vw;
+  font-size: 2em;
+  color: #cb011c;
+  cursor: pointer;
 }
 
 .line {
