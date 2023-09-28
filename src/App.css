@@ -774,10 +774,6 @@ abbr[title] {
     font-size: 1em !important;
   }
 
-  .react-calendar {
-    height: 48vh !important;
-  }
-
   .react-calendar__month-view__days {
     height: 25vh;
   }
@@ -830,6 +826,9 @@ abbr[title] {
     width: 30vw;
   }
 
+  .react-calendar {
+    height: 42vh !important;
+  }
   .sign-in {
     font-size: 1.8em;
   }
